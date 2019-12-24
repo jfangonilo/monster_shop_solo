@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   def new
-
+    if current_user
+      flash[:error] = "You are already logged in"
+      redirect(current_user)
+    end
   end
 
   def create
@@ -8,7 +11,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "You are logged in"
-      login(user)
+      redirect(user)
     else
       flash[:error] = "Invalid email or password"
       render :new
@@ -17,7 +20,7 @@ class SessionsController < ApplicationController
 
 private
 
-  def login(user)
+  def redirect(user)
     if current_admin_user
       redirect_to admin_dash_path
     elsif current_merchant_user

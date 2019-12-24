@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       flash[:success] = "You are now registered and logged in, #{@user.name}"
       redirect_to profile_path
     else
-      flash[:error] = @user.errors.full_messages.to_sentence
+      flash_errors(@user)
       render :new
     end
   end

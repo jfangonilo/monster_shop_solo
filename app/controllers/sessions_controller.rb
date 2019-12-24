@@ -8,9 +8,9 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "You are logged in"
-      if user.admin?
+      if current_admin_user
         redirect_to "/admin"
-      elsif user.merchant_employee? || user.merchant_admin?
+      elsif current_merchant_user
         redirect_to "/merchant"
       else
         redirect_to profile_path

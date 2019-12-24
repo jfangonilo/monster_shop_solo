@@ -31,7 +31,14 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         expect(page).to have_content("Cart: 0")
       end
+    end
 
+    it "I can see a link to the home page" do
+      visit "/"
+      within 'nav' do
+        click_link "Home"
+      end
+      expect(current_path).to eq "/"
     end
   end
 end

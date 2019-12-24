@@ -30,5 +30,23 @@ RSpec.describe 'User Registration' do
       expect(current_path).to eq '/profile'
       expect(page).to have_content 'You are now registered and logged in, Fake Name'
     end
+
+    it "I see a flash message if I miss any fields" do
+      visit '/'
+      within 'nav' do
+        click_link 'Register'
+      end
+      click_button 'Submit'
+
+      expect(page).to have_button "Submit"
+      expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content "Address can't be blank"
+      expect(page).to have_content "City can't be blank"
+      expect(page).to have_content "State can't be blank"
+      expect(page).to have_content "Zip can't be blank"
+      expect(page).to have_content "Email can't be blank"
+      expect(page).to have_content "Password can't be blank"
+      expect(page).to have_content "Password confirmation doesn't match Password"
+    end
   end
 end

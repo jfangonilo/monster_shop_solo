@@ -7,6 +7,7 @@ RSpec.describe User do
     it { should validate_presence_of :city }
     it { should validate_presence_of :state }
     it { should validate_presence_of :zip }
+    it { should validate_numericality_of :zip }
     it { should validate_presence_of :email }
   end
 end

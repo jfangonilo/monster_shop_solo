@@ -10,15 +10,13 @@ Rails.application.routes.draw do
     resource :reviews, only: [:new, :create]
   end
 
+  resources  :reviews, only: [:edit, :update, :destroy]
+
   resources :users, only: [:create]
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
-
-  get "/reviews/:id/edit", to: "reviews#edit"
-  patch "/reviews/:id", to: "reviews#update"
-  delete "/reviews/:id", to: "reviews#destroy"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"

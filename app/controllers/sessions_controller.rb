@@ -9,6 +9,9 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       flash[:success] = "You are logged in"
       login(user)
+    else
+      flash[:error] = "Invalid email or password"
+      render :new
     end
   end
 

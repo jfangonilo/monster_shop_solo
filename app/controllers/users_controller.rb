@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    redirect_to '/profile'
+    @user = User.new(user_params)
+    @user.save
+    redirect_to profile_path
   end
 
   private

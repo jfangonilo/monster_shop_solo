@@ -66,6 +66,7 @@ RSpec.describe 'Site Navigation' do
       end
       expect(current_path).to eq "/profile"
       expect(page).to have_link "Log Out"
+      expect(page).not_to have_link "Register"
     end
   end
 end

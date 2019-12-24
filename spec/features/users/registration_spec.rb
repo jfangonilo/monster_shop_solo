@@ -46,7 +46,6 @@ RSpec.describe 'User Registration' do
       expect(page).to have_content "Zip can't be blank"
       expect(page).to have_content "Email can't be blank"
       expect(page).to have_content "Password can't be blank"
-      expect(page).to have_content "Password confirmation doesn't match Password"
     end
 
     it "I must use a unique email" do

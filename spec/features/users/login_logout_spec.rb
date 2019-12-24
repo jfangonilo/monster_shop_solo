@@ -51,4 +51,21 @@ RSpec.describe "User Login and Logout" do
       expect(page).to have_content "You are logged in"
     end
   end
+
+  describe "As an admin" do
+    before :each do
+      @admin = create(:admin)
+    end
+
+    it "I can log in" do
+      visit "/login"
+
+      fill_in "Email", with: @admin.email
+      fill_in "Password", with: @admin.password
+
+      click_button "Log In"
+      expect(current_path).to eq "/admin"
+      expect(page).to have_content "You are logged in"
+    end
+  end
 end

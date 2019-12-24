@@ -7,7 +7,7 @@ RSpec.describe 'User Registration' do
       within 'nav' do
         click_link "Register" do
       end
-      expect(current_path).to eq '/'
+      expect(current_path).to eq '/register'
       end
     end
   end

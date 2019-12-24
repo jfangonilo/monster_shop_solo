@@ -2,19 +2,13 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/", to: "home#index"
 
+  resources :merchants
+
   resources :users, only: [:create]
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
-
-  get "/merchants", to: "merchants#index"
-  get "/merchants/new", to: "merchants#new"
-  get "/merchants/:id", to: "merchants#show"
-  post "/merchants", to: "merchants#create"
-  get "/merchants/:id/edit", to: "merchants#edit"
-  patch "/merchants/:id", to: "merchants#update"
-  delete "/merchants/:id", to: "merchants#destroy"
 
   get "/items", to: "items#index"
   get "/items/:id", to: "items#show"

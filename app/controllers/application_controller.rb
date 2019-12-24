@@ -7,4 +7,7 @@ class ApplicationController < ActionController::Base
     @cart ||= Cart.new(session[:cart] ||= Hash.new(0))
   end
 
+  def flash_errors(resource)
+    flash[:errors] = resource.errors.full_messages.to_sentence
+  end
 end

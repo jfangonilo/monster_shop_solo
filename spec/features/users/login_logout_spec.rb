@@ -122,4 +122,17 @@ RSpec.describe "User Login and Logout" do
       expect(page). to have_button "Log In"
     end
   end
+
+  describe "I can log out if logged in" do
+    before :each do
+      @user = create(:random_user)
+    end
+
+    it "I can log out" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      visit "/"
+      click_link "Log Out"
+      expect(page).to have_content "You are logged out"
+    end
+  end
 end

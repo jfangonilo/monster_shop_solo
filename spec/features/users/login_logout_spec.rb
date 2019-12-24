@@ -133,6 +133,7 @@ RSpec.describe "User Login and Logout" do
       visit "/"
       click_link "Log Out"
       expect(page).to have_content "You are logged out"
+      expect(current_path).to eq "/"
     end
   end
 end

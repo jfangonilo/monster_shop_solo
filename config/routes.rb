@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get "/", to: "home#index"
 
-  resources :merchants
+  resources :merchants do
+    resources :items, only: [:index, :new, :create]
+  end
+
   resources :items, only: [:index, :show, :edit, :update, :destroy]
 
   resources :users, only: [:create]
@@ -10,10 +13,6 @@ Rails.application.routes.draw do
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
-
-  get "/merchants/:merchant_id/items", to: "items#index"
-  get "/merchants/:merchant_id/items/new", to: "items#new"
-  post "/merchants/:merchant_id/items", to: "items#create"
 
   get "/items/:item_id/reviews/new", to: "reviews#new"
   post "/items/:item_id/reviews", to: "reviews#create"

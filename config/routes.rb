@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"

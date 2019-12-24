@@ -34,4 +34,21 @@ RSpec.describe "User Login and Logout" do
       expect(page).to have_content "You are logged in"
     end
   end
+
+  describe "As a merchant admin" do
+    before :each do
+      @merchant_admin = create(:merchant_admin)
+    end
+
+    it "I can log in" do
+      visit "/login"
+
+      fill_in "Email", with: @merchant_admin.email
+      fill_in "Password", with: @merchant_admin.password
+
+      click_button "Log In"
+      expect(current_path).to eq "/merchant"
+      expect(page).to have_content "You are logged in"
+    end
+  end
 end

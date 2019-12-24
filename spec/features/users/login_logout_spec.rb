@@ -68,4 +68,20 @@ RSpec.describe "User Login and Logout" do
       expect(page).to have_content "You are logged in"
     end
   end
+
+  describe "I can't log in w/ bad credentials" do
+    before :each do
+      @user = create(:random_user)
+    end
+
+    it "bad email" do
+      visit "/login"
+      fill_in "Email", with: "wrong_email@mail.com"
+      fill_in "Password", with: @user.password
+
+      click_button "Log In"
+      expect(page).to have_content "Invalid email or password"
+      expect(page). to have_button "Log In"
+    end
+  end
 end

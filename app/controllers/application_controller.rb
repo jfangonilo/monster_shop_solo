@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def flash_errors(resource)
-    flash[:errors] = resource.errors.full_messages.to_sentence
+    flash[:error] = resource.errors.full_messages.to_sentence
   end
 end

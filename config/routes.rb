@@ -25,4 +25,8 @@ Rails.application.routes.draw do
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
+
+  namespace :merchant, as: :merchant_dash do
+    get "/", to: "dashboard#index"
+  end
 end

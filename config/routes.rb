@@ -6,16 +6,15 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
-  resources :items, only: [:index, :show, :edit, :update, :destroy]
+  resources :items, only: [:index, :show, :edit, :update, :destroy] do
+    resource :reviews, only: [:new, :create]
+  end
 
   resources :users, only: [:create]
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
-
-  get "/items/:item_id/reviews/new", to: "reviews#new"
-  post "/items/:item_id/reviews", to: "reviews#create"
 
   get "/reviews/:id/edit", to: "reviews#edit"
   patch "/reviews/:id", to: "reviews#update"

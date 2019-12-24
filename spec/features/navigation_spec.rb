@@ -3,6 +3,10 @@ require 'rails_helper'
 
 RSpec.describe 'Site Navigation' do
   describe 'As a Visitor' do
+    before :each do
+      visit "/"
+    end
+
     it "I see a nav bar with links to all pages" do
       visit '/merchants'
 
@@ -34,11 +38,17 @@ RSpec.describe 'Site Navigation' do
     end
 
     it "I can see a link to the home page" do
-      visit "/"
       within 'nav' do
         click_link "Home"
       end
       expect(current_path).to eq "/"
+    end
+
+    it "I can see a link to log in" do
+      within 'nav' do
+        click_link "Log In"
+      end
+      expect(current_path).to eq "/login"
     end
   end
 end

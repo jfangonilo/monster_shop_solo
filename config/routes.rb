@@ -19,9 +19,18 @@ Rails.application.routes.draw do
   get "/profile", to: "users#show"
 
   get "/login", to: "sessions#new"
+  post "/login", to: "sessions#create"
 
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
   delete "/cart", to: "cart#empty"
   delete "/cart/:item_id", to: "cart#remove_item"
+
+  namespace :merchant, as: :merchant_dash do
+    get "/", to: "dashboard#index"
+  end
+
+  namespace :admin, as: :admin_dash do
+    get "/", to: "dashboard#index"
+  end
 end

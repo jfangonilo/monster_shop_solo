@@ -135,5 +135,16 @@ RSpec.describe "User Login and Logout" do
       expect(page).to have_content "You are logged out"
       expect(current_path).to eq "/"
     end
+
+    it "clears my cart when I log out" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      item = create(:random_item)
+
+      visit "/items/#{item.id}"
+      click_button "Add To Cart"
+      expect(page).to have_link "Cart: 1"
+      click_link "Log Out"
+      expect(page).to have_link "Cart: 0"
+    end
   end
 end

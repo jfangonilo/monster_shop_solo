@@ -88,6 +88,13 @@ RSpec.describe "User Login and Logout" do
       expect(current_path).to eq "/admin"
       expect(page).to have_content "You are logged in"
     end
+
+    it "I get redirected if already logged in" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
+      visit "/login"
+      expect(current_path).to eq "/admin"
+      expect(page).to have_content "You are already logged in"
+    end
   end
 
   describe "I can't log in w/ bad credentials" do

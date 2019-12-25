@@ -118,4 +118,28 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_content "Logged in as #{@merchant_admin.name}"
     end
   end
+
+  describe "As an admin user" do
+    before :each do
+      @admin = create(:admin)
+    end
+
+    it "I can see a link to the admin dash as an admin employee" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
+      visit "/"
+
+      expect(page).to have_link "Home"
+      expect(page).to have_link "All Merchants"
+      expect(page).to have_link "All Items"
+      expect(page).to have_link "Log Out"
+      expect(page).not_to have_link "Cart"
+      expect(page).not_to have_link "Register"
+      expect(page).not_to have_link "Log In"
+      within 'nav' do
+        click_link "Admin Dashboard"
+      end
+      expect(current_path).to eq "/admin"
+      expect(page).to have_content "Logged in as #{@admin.name}"
+    end
+  end
 end

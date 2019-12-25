@@ -83,6 +83,13 @@ RSpec.describe 'Site Navigation' do
       expect(current_path).to eq "/profile"
       expect(page).to have_content "Logged in as #{@user.name}"
     end
+
+    it "I'm restricted from accessing merchant/admin dashboards" do
+      visit "/merchant"
+      expect(page.status_code).to eq 404
+      visit "/admin"
+      expect(page.status_code).to eq 404
+    end
   end
 
   describe "As a merchant user" do

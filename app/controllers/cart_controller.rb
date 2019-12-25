@@ -1,4 +1,6 @@
 class CartController < ApplicationController
+  before_action :exclude_merchant, only: [:show]
+
   def add_item
     item = Item.find(params[:item_id])
     cart.add_item(item.id.to_s)

@@ -46,8 +46,8 @@
     <h2>All Reviews</h2>
     <% @item.reviews.each do |review| %>
       <section id= 'review-<%=review.id%>'>
-        <%= review.title %>
-        <%= review.content %>
+        <h4><%= review.title %></h4>
+        <p><%= review.content %></p>
         Rating: <%= review.rating %>/5
         <%= link_to "Edit", "/reviews/#{review.id}/edit" %>
         <%= link_to "Delete", "/reviews/#{review.id}", method: :delete %>

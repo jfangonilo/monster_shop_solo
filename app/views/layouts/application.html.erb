@@ -22,6 +22,9 @@
         <%= link_to "Register", "/register" %>
       <% end %>
     </nav>
+    <% if current_user %>
+      <h4>Logged in as <%= current_user.name %></h4>
+    <% end %>
     <% flash.each do |name, msg| %>
       <div class= "<%=name%>-flash">
         <p><%= msg %></p>

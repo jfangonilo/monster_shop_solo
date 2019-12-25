@@ -54,19 +54,20 @@ RSpec.describe 'Site Navigation' do
 
   describe 'As a registered user' do
     before :each do
-      user = create(:random_user)
+      @user = create(:random_user)
     end
 
     it 'I can see a link to my profile' do
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(:user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit "/"
 
+      expect(page).to have_link "Log Out"
+      expect(page).not_to have_link "Register"
       within 'nav' do
         click_link "My Profile"
       end
       expect(current_path).to eq "/profile"
-      expect(page).to have_link "Log Out"
-      expect(page).not_to have_link "Register"
+      expect(page).to have_content "Welcome #{@user.name}"
     end
   end
 end

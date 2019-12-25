@@ -19,6 +19,18 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
+  def require_user
+    render file: "/public/404", status: 404 unless current_user
+  end
+
+  def require_merchant
+    render file: "/public/404", status: 404 unless current_merchant_user
+  end
+
+  def require_admin
+    render file: "/public/404", status: 404 unless current_admin_user
+  end
+
   def flash_errors(resource)
     flash[:error] = resource.errors.full_messages.to_sentence
   end

@@ -135,7 +135,7 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_content "Logged in as #{@merchant_admin.name}"
     end
 
-    it "I'm restricted from accessing user/admin dashboards" do
+    it "I'm restricted from accessing user/admin dashboards and cart" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
       visit "/profile"
       expect(page.status_code).to eq 404

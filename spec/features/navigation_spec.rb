@@ -50,6 +50,15 @@ RSpec.describe 'Site Navigation' do
       end
       expect(current_path).to eq "/login"
     end
+
+    it "I'm restricted from accessing user dashboards" do
+      visit "/profile"
+      expect(page.status_code).to eq 404
+      visit "/merchant"
+      expect(page.status_code).to eq 404
+      visit "/admin"
+      expect(page.status_code).to eq 404
+    end
   end
 
   describe 'As a registered user' do

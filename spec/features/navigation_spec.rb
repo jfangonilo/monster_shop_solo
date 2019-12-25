@@ -67,7 +67,7 @@ RSpec.describe 'Site Navigation' do
         click_link "My Profile"
       end
       expect(current_path).to eq "/profile"
-      expect(page).to have_content "Welcome #{@user.name}"
+      expect(page).to have_content "Logged in as #{@user.name}"
     end
   end
 end

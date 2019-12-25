@@ -141,11 +141,15 @@ RSpec.describe 'Site Navigation' do
       expect(page.status_code).to eq 404
       visit "/admin"
       expect(page.status_code).to eq 404
+      visit "/cart"
+      expect(page.status_code).to eq 404
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_admin)
       visit "/profile"
       expect(page.status_code).to eq 404
       visit "/admin"
+      expect(page.status_code).to eq 404
+      visit "/cart"
       expect(page.status_code).to eq 404
     end
   end

@@ -61,8 +61,13 @@ RSpec.describe 'Site Navigation' do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit "/"
 
+      expect(page).to have_link "Home"
+      expect(page).to have_link "All Merchants"
+      expect(page).to have_link "All Items"
+      expect(page).to have_link "Cart"
       expect(page).to have_link "Log Out"
       expect(page).not_to have_link "Register"
+      expect(page).not_to have_link "Log In"
       within 'nav' do
         click_link "My Profile"
       end

@@ -31,6 +31,10 @@ class ApplicationController < ActionController::Base
     render file: "/public/404", status: 404 unless current_admin_user
   end
 
+  def exclude_merchant
+    render file: "/public/404", status: 404 if current_merchant_user
+  end
+
   def flash_errors(resource)
     flash[:error] = resource.errors.full_messages.to_sentence
   end

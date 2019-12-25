@@ -25,4 +25,7 @@ class Item <ApplicationRecord
     item_orders.empty?
   end
 
+  def self.active_items
+    where(active?: true)
+  end
 end

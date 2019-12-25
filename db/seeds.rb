@@ -1,21 +1,51 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+include FactoryBot::Syntax::Methods
 
 Merchant.destroy_all
 Item.destroy_all
+Review.destroy_all
+User.destroy_all
+Order.destroy_all
+ItemOrder.destroy_all
 
-#merchants
-bike_shop = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
-dog_shop = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+merchants = create_list(:random_merchant, 4)
 
-#bike_shop items
-tire = bike_shop.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
+items_0 = create_list(:random_item, 7, merchant: merchants[0])
+items_0_inactive = create_list(:random_item, 3, merchant: merchants[0], active?: false)
 
-#dog_shop items
-pull_toy = dog_shop.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
-dog_bone = dog_shop.items.create(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", active?:false, inventory: 21)
+items_1 = create_list(:random_item, 7, merchant: merchants[1])
+items_1_inactive = create_list(:random_item, 3, merchant: merchants[1], active?: false)
+
+items_2 = create_list(:random_item, 7, merchant: merchants[2])
+items_2_inactive = create_list(:random_item, 3, merchant: merchants[2], active?: false)
+
+items_3 = create_list(:random_item, 7, merchant: merchants[3])
+items_3_inactive = create_list(:random_item, 3, merchant: merchants[3], active?: false)
+
+Item.all.each do |item|
+  create_list(:random_review, 5, item: item)
+end
+
+create(:random_user)
+create(:merchant_employee)
+create(:merchant_admin)
+create(:admin)
+
+order_1 = create(:random_order)
+Item.all.each do |item|
+  create(:item_order, order: order_1, item: item, price: item.price)
+end
+
+order_2 = create(:random_order)
+Item.all.each do |item|
+  create(:item_order, order: order_2, item: item, price: item.price)
+end
+
+order_3 = create(:random_order)
+Item.all.each do |item|
+  create(:item_order, order: order_3, item: item, price: item.price)
+end
+
+order_4 = create(:random_order)
+Item.all.each do |item|
+  create(:item_order, order: order_3, item: item, price: item.price)
+end

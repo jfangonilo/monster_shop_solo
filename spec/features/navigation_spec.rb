@@ -82,7 +82,7 @@ RSpec.describe 'Site Navigation' do
       @merchant_admin = create(:merchant_admin)
     end
 
-    it "I can see a link to the merchant dash" do
+    it "I can see a link to the merchant dash as a merchant employee" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
       visit "/"
 
@@ -98,6 +98,24 @@ RSpec.describe 'Site Navigation' do
       end
       expect(current_path).to eq "/merchant"
       expect(page).to have_content "Logged in as #{@merchant_employee.name}"
+    end
+
+    it "I can see a link to the merchant dash as a merchant admin" do
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_admin)
+      visit "/"
+
+      expect(page).to have_link "Home"
+      expect(page).to have_link "All Merchants"
+      expect(page).to have_link "All Items"
+      expect(page).to have_link "Cart"
+      expect(page).to have_link "Log Out"
+      expect(page).not_to have_link "Register"
+      expect(page).not_to have_link "Log In"
+      within 'nav' do
+        click_link "Merchant Dashboard"
+      end
+      expect(current_path).to eq "/merchant"
+      expect(page).to have_content "Logged in as #{@merchant_admin.name}"
     end
   end
 end

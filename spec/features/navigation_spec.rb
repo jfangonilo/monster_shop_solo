@@ -179,7 +179,7 @@ RSpec.describe 'Site Navigation' do
   end
 
   it "I'm restricted from accessing user/merchant dashboards and cart" do
-    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
     visit "/profile"
     expect(page.status_code).to eq 404
     visit "/merchant"

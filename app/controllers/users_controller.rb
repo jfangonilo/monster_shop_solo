@@ -26,12 +26,15 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = current_user
+    @user = current_user
     if params[:user][:password]
       update_password
-    elsif user.update(user_params)
+    elsif @user.update(user_params)
       flash[:success] = "Profile Updated!"
       redirect_to profile_path
+    else
+      flash_errors(@user)
+      render :edit
     end
   end
 
@@ -46,7 +49,7 @@ private
 
   def update_password
     if params[:user][:password] == params[:user][:password_confirmation]
-      user.update(user_params)
+      @user.update(user_params)
       flash[:success] = "Password Updated!"
       redirect_to profile_path
     else

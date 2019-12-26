@@ -47,5 +47,8 @@ RSpec.describe 'Cart show' do
     visit "/cart"
 
     expect(page).to_not have_link "Checkout"
+    expect(page).to have_content "Log In or Register"
+    expect(page).to have_link "Log In"
+    expect(page).to have_link "Register"
   end
 end

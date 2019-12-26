@@ -30,10 +30,10 @@ class Item <ApplicationRecord
   end
 
   def self.by_quantity_ordered(amount = nil, order = "DESC")
-    Item.joins(:item_orders)
-        .select("items.id, items.name, sum(item_orders.quantity) AS quantity_sold")
-        .group(:id)
-        .order("quantity_sold #{order}")
-        .limit(amount)
+    joins(:item_orders)
+    .select("items.id, items.name, sum(item_orders.quantity) AS quantity_sold")
+    .group(:id)
+    .order("quantity_sold #{order}")
+    .limit(amount)
   end
 end

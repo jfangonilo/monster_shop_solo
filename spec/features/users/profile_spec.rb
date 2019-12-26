@@ -92,4 +92,15 @@ RSpec.describe "user profile page" do
     expect(current_path).to eq "/profile/edit_password"
     expect(page).to have_content "Passwords don't match!"
   end
+
+  it "doesn't let me change email if already used" do
+    create(:random_user, email: "totallyreal@email.com")
+    user = create(:random_user)
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
+    visit "/profile/edit"
+    fill_in "Email", with: "totallyreal@email.com"
+    click_button "Update Profile"
+    expect(page).to have_content "Email has already been taken"
+  end
 end

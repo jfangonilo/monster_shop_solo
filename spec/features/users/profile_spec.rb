@@ -48,4 +48,18 @@ RSpec.describe "user profile page" do
 
     expect(page).not_to have_content "OG Fake Name"
   end
+
+  it "lets me change my password" do
+    user = create(:random_user, name: "OG Fake Name")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/profile"
+    click_link "Change Password"
+
+    expect(current_path).to eq "/profile/edit_password"
+    fill_in "Password", with: "verysecure"
+    fill_in "Password confirmation", with: "verysecure"
+    click_button "Change Password"
+    expect(current_path).to eq "/profile"
+    expect(page).to have_content "Password Updated!"
+  end
 end

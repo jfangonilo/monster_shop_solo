@@ -88,7 +88,7 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_content item_3.name
       expect(page).to have_content item_4.name
       expect(page).to have_content item_5.name
-      expect(page).to have_content "Quantity: 20"
+      expect(page).to have_content "Total Sold: 20"
     end
 
     within "#bottom-5" do
@@ -97,7 +97,7 @@ RSpec.describe "Items Index Page" do
       expect(page).to have_content item_8.name
       expect(page).to have_content item_9.name
       expect(page).to have_content item_0.name
-      expect(page).to have_content "Quantity: 1"
+      expect(page).to have_content "Total Sold: 1"
     end
   end
 end

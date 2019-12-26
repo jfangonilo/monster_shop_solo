@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :orders, only: [:new, :create, :show]
 
-  resources :users, only: [:create]
+  resources :users, only: [:create, :update]
   get "/register", to: "users#new"
   get "/profile", to: "users#show"
   get "/profile/edit", to: "users#edit"

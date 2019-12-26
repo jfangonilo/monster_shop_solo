@@ -49,6 +49,24 @@ RSpec.describe "user profile page" do
     expect(page).not_to have_content "OG Fake Name"
   end
 
+  it "flashes an error message if I miss fields" do
+    user = create(:random_user, name: "OG Fake Name")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/profile/edit"
+
+    fill_in "Name", with: ""
+    fill_in "Address", with: ""
+    fill_in "City", with: ""
+    fill_in "State", with: ""
+    fill_in "Zip", with: ""
+    fill_in "Email", with: ""
+    click_button "Update Profile"
+
+    expect(page).not_to have_content "Profile Updated!"
+    expect(page).to have_content "can't be blank"
+    expect(page).to have_button "Update Profile"
+  end
+
   it "lets me change my password" do
     user = create(:random_user, name: "OG Fake Name")
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)

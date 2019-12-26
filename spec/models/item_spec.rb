@@ -75,5 +75,23 @@ describe Item, type: :model do
 
       expect(Item.active_items).to match_array [chain, active]
     end
+
+    it "by quantity ordered" do
+      user = create(:random_user)
+      order = create(:random_order)
+      top_5 = create_list(:random_item, 5)
+      bottom_5 = create_list(:random_item, 5)
+
+      top_5.each do |item|
+        ItemOrder.create(item: item, order: order, price: item.price, quantity: 20)
+      end
+
+      bottom_5.each do |item|
+        ItemOrder.create(item: item, order: order, price: item.price, quantity: 1)
+      end
+
+      expect(Item.by_quantity_ordered(5, "DESC")).to match_array(top_5)
+      expect(Item.by_quantity_ordered(5, "ASC")).to match_array(bottom_5)
+    end
   end
 end

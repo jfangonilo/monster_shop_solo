@@ -55,4 +55,49 @@ RSpec.describe "Items Index Page" do
       expect(page).not_to have_css("img[src*='#{@dog_bone.image}']")
     end
   end
+
+  it "can list the top and bottom 5 items by popularity" do
+    user = create(:random_user)
+    order = create(:random_order)
+    item_1 = create(:random_item)
+    item_2 = create(:random_item)
+    item_3 = create(:random_item)
+    item_4 = create(:random_item)
+    item_5 = create(:random_item)
+    item_6 = create(:random_item)
+    item_7 = create(:random_item)
+    item_8 = create(:random_item)
+    item_9 = create(:random_item)
+    item_0 = create(:random_item)
+
+    top_5 = [item_1, item_2, item_3, item_4, item_5]
+    bottom_5 = [item_6, item_7, item_8, item_9, item_0]
+
+    top_5.each do |item|
+      ItemOrder.create(item: item, order: order, price: item.price, quantity: 20)
+    end
+
+    bottom_5.each do |item|
+      ItemOrder.create(item: item, order: order, price: item.price, quantity: 1)
+    end
+
+    visit "/items"
+    within "#top-5" do
+      expect(page).to have_content item_1.name
+      expect(page).to have_content item_2.name
+      expect(page).to have_content item_3.name
+      expect(page).to have_content item_4.name
+      expect(page).to have_content item_5.name
+      expect(page).to have_content "Quantity: 20"
+    end
+
+    within "#bottom-5" do
+      expect(page).to have_content item_6.name
+      expect(page).to have_content item_7.name
+      expect(page).to have_content item_8.name
+      expect(page).to have_content item_9.name
+      expect(page).to have_content item_0.name
+      expect(page).to have_content "Quantity: 1"
+    end
+  end
 end

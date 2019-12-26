@@ -27,9 +27,13 @@ class UsersController < ApplicationController
 
   def update
     user = current_user
-    user.update!(user_params)
-    flash[:success] = "Profile Updated!"
-    redirect_to profile_path
+    if params[:user][:password] && user.update(user_params)
+      flash[:success] = "Password Updated!"
+      redirect_to profile_path
+    elsif user.update(user_params)
+      flash[:success] = "Profile Updated!"
+      redirect_to profile_path
+    end
   end
 
   def edit_password

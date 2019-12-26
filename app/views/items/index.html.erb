@@ -6,15 +6,17 @@
 <% end %>
 
 <p><section id="top-5">
-  <% Item.by_quantity_ordered(5, "DESC").each do |item| %>
+  <h3>Most Popular</h3>
+  <% @items.by_quantity_ordered(5, "DESC").each do |item| %>
     Name: <%= item.name %></br>
-    Total Sales: <%= item.quantity %></br>
+    Total Sold: <%= item.quantity_sold %></br>
   <% end %>
 </section></p>
 <p><section id="bottom-5">
-  <% Item.by_quantity_ordered(5, "ASC").each do |item| %>
+  <h3>Least Popular</h3>
+  <% @items.by_quantity_ordered(5, "ASC").each do |item| %>
     Name: <%= item.name %></br>
-    Total Sales: <%= item.quantity %></br>
+    Total Sold: <%= item.quantity_sold %></br>
   <% end %>
 </section></p>
 

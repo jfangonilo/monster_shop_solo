@@ -18,7 +18,10 @@ RSpec.describe 'Cart show' do
       @items_in_cart = [@paper,@tire,@pencil]
     end
 
-    it 'Theres a link to checkout' do
+    it 'Theres a link to checkout if logged in' do
+      user = create(:random_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+
       visit "/cart"
 
       expect(page).to have_link("Checkout")
@@ -35,5 +38,17 @@ RSpec.describe 'Cart show' do
 
       expect(page).to_not have_link("Checkout")
     end
+  end
+
+  it "can't check out if not logged in" do
+    item = create(:random_item)
+    visit "/items/#{item.id}"
+    click_on "Add To Cart"
+    visit "/cart"
+
+    expect(page).to_not have_link "Checkout"
+    expect(page).to have_content "Log In or Register"
+    expect(page).to have_link "Log In"
+    expect(page).to have_link "Register"
   end
 end

@@ -3,3 +3,4 @@
   <h3><%= @user.email %></h3>
   <p><%= @user.address %> <%= @user.city %>, <%= @user.state %> <%= @user.zip %></p>
 </section>
+<%= link_to "Edit Profile", "/profile", method: :patch %>

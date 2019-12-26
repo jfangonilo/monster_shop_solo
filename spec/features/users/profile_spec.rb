@@ -23,4 +23,29 @@ RSpec.describe "user profile page" do
     visit "/profile"
     expect(page).to have_link "Edit Profile"
   end
+
+  it "lets me edit my profile" do
+    user = create(:random_user, name: "OG Fake Name")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/profile/edit"
+
+    fill_in "Name", with: "fake name"
+    fill_in "Address", with: "fake address"
+    fill_in "City", with: "fake city"
+    fill_in "State", with: "fake state"
+    fill_in "Zip", with: "90210"
+    fill_in "Email", with: "fake2@email.com"
+    click_button "Update Profile"
+
+    expect(current_path).to eq "/profile"
+    expect(page).to have_content "fake name"
+    expect(page).to have_content "fake address"
+    expect(page).to have_content "fake city"
+    expect(page).to have_content "fake state"
+    expect(page).to have_content "90210"
+    expect(page).to have_content "fake2@email.com"
+    expect(page).to have_content "Profile Updated!"
+
+    expect(page).not_to have_content "OG Fake Name"
+  end
 end

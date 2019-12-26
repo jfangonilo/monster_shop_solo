@@ -62,4 +62,16 @@ RSpec.describe "user profile page" do
     expect(current_path).to eq "/profile"
     expect(page).to have_content "Password Updated!"
   end
+
+  it "doesn't let me change pw if fields don't match" do
+    user = create(:random_user, name: "OG Fake Name")
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+    visit "/profile/edit_password"
+    fill_in "Password", with: "verysecure"
+    fill_in "Password confirmation", with: "notverysecure"
+    click_button "Change Password"
+
+    expect(current_path).to eq "/profile/edit_password"
+    expect(page).to have_content "Passwords don't match!"
+  end
 end

@@ -28,4 +28,12 @@ class Item <ApplicationRecord
   def self.active_items
     where(active?: true)
   end
+
+  def self.by_quantity_ordered(amount = nil, order = "DESC")
+    Item.joins(:item_orders)
+        .select("items.id, items.name, sum(item_orders.quantity) AS quantity_sold")
+        .group(:id)
+        .order("quantity_sold #{order}")
+        .limit(amount)
+  end
 end

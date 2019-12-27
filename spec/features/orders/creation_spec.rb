@@ -40,9 +40,12 @@ RSpec.describe("Order Creation") do
 
       click_button "Create Order"
 
-      new_order = Order.last
+      expect(page).to have_content "Order Submitted"
+      expect(current_path).to eq "/profile/orders"
+      expect(page).to have_content "Cart: 0"
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      new_order = Order.last
+      visit "/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)

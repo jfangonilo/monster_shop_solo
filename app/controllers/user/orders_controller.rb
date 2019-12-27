@@ -1,4 +1,4 @@
-class OrdersController <ApplicationController
+class User::OrdersController < User::BaseController
 
   def new
 
@@ -28,8 +28,7 @@ class OrdersController <ApplicationController
     end
   end
 
-
-  private
+private
 
   def order_params
     params.permit(:name, :address, :city, :state, :zip)

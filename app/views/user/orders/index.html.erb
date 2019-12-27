@@ -5,7 +5,7 @@
     Order ID: <%= link_to order.id, "/profile/orders/#{order.id}" %></br>
     Created: <%= order.created_at %></br>
     Updated: <%= order.updated_at %></br>
-    Status: <%= order.status %></br>
+    Status: <%= order.status.capitalize %></br>
     Total Quantity: <%= order.total_quantity %></br>
     Grand Total: <%= order.grandtotal %></br>
   </section></br>

@@ -7,6 +7,6 @@
     Updated: <%= order.updated_at %></br>
     Status: <%= order.status.capitalize %></br>
     Total Quantity: <%= order.total_quantity %></br>
-    Grand Total: <%= order.grandtotal %></br>
+    Grand Total: <%= number_to_currency(order.grandtotal) %></br>
   </section></br>
 <% end %>

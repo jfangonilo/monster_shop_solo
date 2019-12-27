@@ -21,13 +21,13 @@ RSpec.describe "order show page" do
 
   it 'shows one of my orders' do
     visit "/profile/orders"
-    click_link @order_1.id
+    click_link "#{@order_1.id}"
 
     expect(current_path).to eq "/profile/orders/#{@order_1.id}"
     expect(page).to have_content "Order ID: #{@order_1.id}"
     expect(page).to have_content "Created: #{@order_1.created_at}"
     expect(page).to have_content "Updated: #{@order_1.updated_at}"
-    expect(page).to have_content @order_1.total_quantity
-    expect(page).to have_content @order_1.grandtotal
+    expect(page).to have_content "Total Items: #{@order_1.total_quantity}"
+    expect(page).to have_content "Total:"
   end
 end

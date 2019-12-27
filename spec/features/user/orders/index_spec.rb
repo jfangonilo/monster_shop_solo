@@ -34,7 +34,7 @@ RSpec.describe "User Profile" do
       expect(page).to have_content("Updated: #{@order_1.updated_at}")
       expect(page).to have_content("Status: #{@order_1.status}")
       expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
-      expect(page).to have_content("Grand Total: #{@order_1.grand_total}")
+      expect(page).to have_content("Grand Total: #{@order_1.grandtotal}")
     end
 
     within "#order-#{@order_2.id}" do
@@ -43,7 +43,7 @@ RSpec.describe "User Profile" do
       expect(page).to have_content("Updated: #{@order_2.updated_at}")
       expect(page).to have_content("Status: #{@order_2.status}")
       expect(page).to have_content("Total Quantity: #{@order_2.total_quantity}")
-      expect(page).to have_content("Grand Total: #{@order_2.grand_total}")
+      expect(page).to have_content("Grand Total: #{@order_2.grandtotal}")
     end
   end
 

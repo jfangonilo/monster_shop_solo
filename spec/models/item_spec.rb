@@ -58,9 +58,10 @@ describe Item, type: :model do
       chain = bike_shop.items.create(name: "Chain", description: "It'll never break!", price: 50, image: "https://www.rei.com/media/b61d1379-ec0e-4760-9247-57ef971af0ad?size=784x588", inventory: 5)
       active = create(:random_item)
       inactive = create(:random_item, active?: false)
+      user = create(:random_user)
 
       expect(chain.no_orders?).to eq(true)
-      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
+      order = Order.create(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, user: user)
       order.item_orders.create(item: chain, price: chain.price, quantity: 2)
       expect(chain.no_orders?).to eq(false)
     end
@@ -78,7 +79,7 @@ describe Item, type: :model do
 
     it "by quantity ordered" do
       user = create(:random_user)
-      order = create(:random_order)
+      order = create(:random_order, user: user)
       top_5 = create_list(:random_item, 5)
       bottom_5 = create_list(:random_item, 5)
 

@@ -1,15 +1,16 @@
-class OrdersController <ApplicationController
+class User::OrdersController < User::BaseController
 
   def new
 
   end
 
   def show
-    @order = Order.find(params[:id])
+    @order = current_user.orders.find(params[:id])
   end
 
   def create
-    order = Order.create(order_params)
+    user = current_user
+    order = user.orders.create(order_params)
     if order.save
       cart.items.each do |item,quantity|
         order.item_orders.create({
@@ -19,15 +20,15 @@ class OrdersController <ApplicationController
           })
       end
       session.delete(:cart)
-      redirect_to "/orders/#{order.id}"
+      flash[:success] = "Order Submitted"
+      redirect_to profile_orders_path
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
   end
 
-
-  private
+private
 
   def order_params
     params.permit(:name, :address, :city, :state, :zip)

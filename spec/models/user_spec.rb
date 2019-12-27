@@ -12,4 +12,8 @@ RSpec.describe User do
     it { should validate_uniqueness_of :email}
     it { should validate_confirmation_of :password}
   end
+
+  describe "relationships" do
+    it { should have_many :orders }
+  end
 end

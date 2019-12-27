@@ -58,7 +58,7 @@ RSpec.describe "Items Index Page" do
 
   it "can list the top and bottom 5 items by popularity" do
     user = create(:random_user)
-    order = create(:random_order)
+    order = create(:random_order, user: user)
     item_1 = create(:random_item)
     item_2 = create(:random_item)
     item_3 = create(:random_item)

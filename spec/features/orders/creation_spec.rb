@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe("Order Creation") do
   describe "When I check out from my cart" do
     before(:each) do
-      user = create(:random_user)
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
+      @user = create(:random_user)
+      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
@@ -40,9 +40,12 @@ RSpec.describe("Order Creation") do
 
       click_button "Create Order"
 
-      new_order = Order.last
+      expect(page).to have_content "Order Submitted"
+      expect(current_path).to eq "/profile/orders"
+      expect(page).to have_content "Cart: 0"
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      new_order = Order.last
+      visit "/profile/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)
@@ -104,6 +107,18 @@ RSpec.describe("Order Creation") do
       expect(page).to have_button("Create Order")
     end
 
+    # it "displays my orders on my profile page" do
+    #   merchant = create(:random_merchant)
+    #   items = create(:random_item, 5, merchant: merchant)
 
+    #   order = create(:random_order, user: user)
+    #   items.each do |item|
+    #     create(:item_order, order: order, item: item, price: item.price)
+    #   end
+
+    #   visit "/profile/orders"
+    #   expect(page).to have_content "Order: #{order.id}"
+    #   expect(page).to have_content "Ordered on: #{order.created_at}"
+    # end
   end
 end

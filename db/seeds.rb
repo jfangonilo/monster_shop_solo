@@ -25,27 +25,27 @@ Item.all.each do |item|
   create_list(:random_review, 5, item: item)
 end
 
-create(:random_user)
+user = create(:random_user)
 create(:merchant_employee)
 create(:merchant_admin)
 create(:admin)
 
-order_1 = create(:random_order)
+order_1 = create(:random_order, user: user)
 Item.all.each do |item|
   create(:item_order, order: order_1, item: item, price: item.price)
 end
 
-order_2 = create(:random_order)
+order_2 = create(:random_order, user: user)
 Item.all.each do |item|
   create(:item_order, order: order_2, item: item, price: item.price)
 end
 
-order_3 = create(:random_order)
+order_3 = create(:random_order, user: user)
 Item.all.each do |item|
   create(:item_order, order: order_3, item: item, price: item.price)
 end
 
-order_4 = create(:random_order)
+order_4 = create(:random_order, user: user)
 Item.all.each do |item|
   create(:item_order, order: order_3, item: item, price: item.price)
 end

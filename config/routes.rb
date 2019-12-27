@@ -20,7 +20,7 @@ Rails.application.routes.draw do
 
   get "/profile/orders", to: "user/orders#index"
   get "/profile/orders/new", to: "user/orders#new"
-  post "/profile/orders", to: "user/orders#create"
+  post "/orders", to: "user/orders#create"
   get "/profile/orders/:id", to: "user/orders#show"
 
   get "/login", to: "sessions#new"

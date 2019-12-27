@@ -6,5 +6,7 @@ class User < ApplicationRecord
   validates_numericality_of :zip
   validates_confirmation_of :password
 
+  has_many :orders
+
   enum role: %w(user merchant_employee merchant_admin admin)
 end

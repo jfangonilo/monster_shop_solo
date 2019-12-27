@@ -21,7 +21,7 @@ class OrdersController <ApplicationController
       end
       session.delete(:cart)
       flash[:success] = "Order Submitted"
-      redirect_to "/profile/orders"
+      redirect_to profile_orders_path
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new

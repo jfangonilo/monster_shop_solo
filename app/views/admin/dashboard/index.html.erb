@@ -1,9 +1,12 @@
 <section id="all-orders">
   <% @orders.each do |order| %>
-    <li><section id="order-<%= order.id %>">
-      Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
+    <section id="order-<%= order.id %>">
+      <li>Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
       Order ID: <%= order.id %></br>
       Created: <%= order.created_at %></br>
-    </section></li></br>
+      <% if order.packaged? %>
+        <%= button_to "Ship Order", "/admin/orders/#{order.id}", method: :patch %>
+      <% end %></li>
+    </section></br>
   <% end %>
 </section>

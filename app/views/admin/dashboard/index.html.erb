@@ -4,6 +4,9 @@
       Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
       Order ID: <%= order.id %></br>
       Created: <%= order.created_at %></br>
+      <% if order.packaged? %>
+        <%= button_to "Ship Order", "/admin/orders/:id", method: :patch %>
+      <% end %>
     </section></li></br>
   <% end %>
 </section>

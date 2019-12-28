@@ -1,0 +1,7 @@
+<% @orders.each do |order| %>
+  <section id="order-<%= order.id %>">
+    Name: <%= order.name %></br>
+    Order ID: <%= order.id %></br>
+    Created: <%= order.created_at %></br>
+  </section>
+<% end %></br>

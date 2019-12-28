@@ -14,4 +14,8 @@ class Order <ApplicationRecord
   def total_quantity
     item_orders.sum(:quantity)
   end
+
+  def package_if_fulfilled
+    update(status: "packaged") if item_orders.distinct.pluck(:status) == ["fulfilled"]
+  end
 end

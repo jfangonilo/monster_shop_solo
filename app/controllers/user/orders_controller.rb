@@ -34,11 +34,7 @@ class User::OrdersController < User::BaseController
 
   def update
     order = current_user.orders.find(params[:id])
-    order.update(status: "cancelled")
-    order.item_orders.each do |item_order|
-      item_order.update(status: "unfulfilled")
-      item_order.item.update(inventory: item_order.item.inventory + item_order.quantity)
-    end
+    order.cancel
     redirect_to profile_path
   end
 

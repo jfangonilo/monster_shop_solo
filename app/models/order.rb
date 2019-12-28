@@ -7,6 +7,10 @@ class Order <ApplicationRecord
 
   enum status: %w(packaged pending shipped cancelled)
 
+  def self.by_status
+    order(status: :ASC)
+  end
+
   def grandtotal
     item_orders.sum('price * quantity')
   end

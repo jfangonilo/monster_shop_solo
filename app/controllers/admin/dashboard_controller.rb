@@ -1,5 +1,5 @@
 class Admin::DashboardController < Admin::BaseController
   def index
-    @orders = Order.order(status: :ASC)
+    @orders = Order.by_status
   end
 end

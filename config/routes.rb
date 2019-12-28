@@ -39,5 +39,6 @@ Rails.application.routes.draw do
 
   namespace :admin, as: :admin_dash do
     get "/", to: "dashboard#index"
+    resources :orders, only: [:update]
   end
 end

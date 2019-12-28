@@ -64,4 +64,32 @@ RSpec.describe "admin dashboard" do
       expect(page.all('li')[3]).to have_content(@order_4.id)
     end
   end
+
+  it 'lets me ship packaged orders' do
+    visit "/admin"
+
+    within "#order-#{@order_1.id}" do
+      expect(page).to_not have_button "Ship Order"
+    end
+
+    within "#order-#{@order_3.id}" do
+      expect(page).to_not have_button "Ship Order"
+    end
+
+    within "#order-#{@order_4.id}" do
+      expect(page).to_not have_button "Ship Order"
+    end
+
+    within "#order-#{@order_2.id}" do
+      click_button "Ship Order"
+    end
+
+    @order_2.reload
+    expect(@order_2.shipped?).to be(true)
+
+    within "#order-#{@order_2.id}" do
+      expect(page).to_not have_button "Ship Order"
+    end
+  end
+
 end

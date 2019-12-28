@@ -1,7 +1,9 @@
-<% @orders.each do |order| %>
-  <section id="order-<%= order.id %>">
-    Name: <%= order.name %></br>
-    Order ID: <%= order.id %></br>
-    Created: <%= order.created_at %></br>
-  </section>
-<% end %></br>
+<section id="all-orders">
+  <% @orders.each do |order| %>
+    <li><section id="order-<%= order.id %>">
+      Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
+      Order ID: <%= order.id %></br>
+      Created: <%= order.created_at %></br>
+    </section></li></br>
+  <% end %>
+</section>

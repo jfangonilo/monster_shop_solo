@@ -40,13 +40,13 @@ RSpec.describe "order show page" do
     @order_1.reload
     expect(@order_1.cancelled?).to be(true)
 
-    @order_1.item_orders.reload
     @order_1.item_orders.each do |item_order|
+      item_order.reload
       expect(item_order.unfulfilled?).to be(true)
     end
 
-    @items_1.reload
     @items_1.each do |item|
+      item.reload
       expect(item.inventory).to eq(10)
     end
 

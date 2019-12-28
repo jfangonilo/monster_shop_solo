@@ -56,5 +56,12 @@ RSpec.describe "admin dashboard" do
       expect(page).to have_content @order_4.id
       expect(page).to have_content @order_4.created_at
     end
+
+    within "#all-orders" do
+      expect(page.all('li')[0]).to have_content(@order_2.id)
+      expect(page.all('li')[1]).to have_content(@order_1.id)
+      expect(page.all('li')[2]).to have_content(@order_3.id)
+      expect(page.all('li')[3]).to have_content(@order_4.id)
+    end
   end
 end

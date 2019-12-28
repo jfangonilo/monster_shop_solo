@@ -38,6 +38,14 @@ describe Order, type: :model do
       expect(@order_1.total_quantity).to eq(5)
     end
 
+    it 'cancel' do
+      expect(@order_1.cancelled?).to be(false)
+      @order_1.cancel
+      expect(@order_1.cancelled?).to be(true)
+      expect(@order_1.item_orders[0].unfulfilled?).to be(true)
+      expect(@order_1.item_orders[1].unfulfilled?).to be(true)
+    end
+
     it 'package if fulfilled' do
       @order_1.package_if_fulfilled
       expect(@order_1.packaged?).to be(false)

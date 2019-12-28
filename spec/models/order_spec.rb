@@ -15,6 +15,20 @@ describe Order, type: :model do
     it { should belong_to :user }
   end
 
+  describe 'class methods' do
+    before :each do
+      @user = create(:random_user)
+      @order_1 = create(:random_order, status: "cancelled", user: @user)
+      @order_2 = create(:random_order, status: "packaged", user: @user)
+      @order_3 = create(:random_order, status: "pending", user: @user)
+      @order_4 = create(:random_order, status: "shipped", user: @user)
+    end
+
+    it 'by status' do
+      expect(Order.by_status).to eq([@order_2, @order_3, @order_4, @order_1])
+    end
+  end
+
   describe 'instance methods' do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)

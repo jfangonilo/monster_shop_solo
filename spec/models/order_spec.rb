@@ -37,5 +37,13 @@ describe Order, type: :model do
     it 'total_quantity' do
       expect(@order_1.total_quantity).to eq(5)
     end
+
+    it 'all itemorders fulfilled?' do
+      expect(@order_1.all_itemorders_fulfilled?).to be_falsey
+      @order_1.item_orders[0].update(status: "fulfilled")
+      expect(@order_1.all_itemorders_fulfilled?).to be_falsey
+      @order_1.item_orders[1].update(status: "fulfilled")
+      expect(@order_1.all_itemorders_fulfilled?).to be_truthy
+    end
   end
 end

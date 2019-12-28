@@ -12,7 +12,7 @@ RSpec.describe "order show page" do
     @items_1.each do |item|
       create(:item_order, order: @order_1, item: item, price: item.price, quantity: 5)
     end
-    items_2.each do |item|
+    @items_2.each do |item|
       create(:item_order, order: @order_2, item: item, price: item.price)
     end
 
@@ -45,6 +45,7 @@ RSpec.describe "order show page" do
       expect(item_order.unfulfilled?).to be(true)
     end
 
+    @items_1.reload
     @items_1.each do |item|
       expect(item.inventory).to eq(10)
     end

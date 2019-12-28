@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   get "/profile/orders/new", to: "user/orders#new"
   post "/orders", to: "user/orders#create"
   get "/profile/orders/:id", to: "user/orders#show"
+  patch "/profile/orders/:id", to: "user/orders#update"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"

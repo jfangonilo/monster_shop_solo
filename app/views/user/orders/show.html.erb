@@ -47,6 +47,9 @@
   <% end %>
 </table>
 
+<section id="total-quantity">
+  <p>Total Items: <%= @order.total_quantity %></p>
+</section>
 <section id="grandtotal">
   <p>Total: <%=number_to_currency(@order.grandtotal)%></p>
 </section>
@@ -56,3 +59,7 @@
 <section id="dateupdated">
   <p>Updated: <%= @order.updated_at %></p>
 </section>
+
+<% if @order.pending? %>
+  <%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %>
+<% end %>

@@ -9,7 +9,7 @@ class User::OrdersController < User::BaseController
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.includes(items: [:merchant]).find(params[:id])
   end
 
   def create
@@ -30,6 +30,16 @@ class User::OrdersController < User::BaseController
       flash[:notice] = "Please complete address form to create an order."
       render :new
     end
+  end
+
+  def update
+    order = current_user.orders.find(params[:id])
+    order.update(status: "cancelled")
+    order.item_orders.each do |item_order|
+      item_order.update(status: "unfulfilled")
+      item_order.item.update(inventory: item_order.item.inventory + item_order.quantity)
+    end
+    redirect_to profile_path
   end
 
 private

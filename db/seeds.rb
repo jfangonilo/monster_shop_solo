@@ -47,5 +47,5 @@ end
 
 order_4 = create(:random_order, user: user)
 Item.all.each do |item|
-  create(:item_order, order: order_3, item: item, price: item.price)
+  create(:item_order, order: order_4, item: item, price: item.price)
 end

@@ -32,19 +32,18 @@ RSpec.describe "User Profile" do
       expect(page).to have_content("Order ID: #{@order_1.id}")
       expect(page).to have_content("Created: #{@order_1.created_at}")
       expect(page).to have_content("Updated: #{@order_1.updated_at}")
-      expect(page).to have_content("Status: #{@order_1.status}")
+      expect(page).to have_content("Status: #{@order_1.status.capitalize}")
       expect(page).to have_content("Total Quantity: #{@order_1.total_quantity}")
-      expect(page).to have_content("Grand Total: #{@order_1.grandtotal}")
+      expect(page).to have_content("Grand Total:")
     end
 
     within "#order-#{@order_2.id}" do
       expect(page).to have_content("Order ID: #{@order_2.id}")
       expect(page).to have_content("Created: #{@order_2.created_at}")
       expect(page).to have_content("Updated: #{@order_2.updated_at}")
-      expect(page).to have_content("Status: #{@order_2.status}")
+      expect(page).to have_content("Status: #{@order_2.status.capitalize}")
       expect(page).to have_content("Total Quantity: #{@order_2.total_quantity}")
-      expect(page).to have_content("Grand Total: #{@order_2.grandtotal}")
+      expect(page).to have_content("Grand Total:")
     end
   end
-
 end

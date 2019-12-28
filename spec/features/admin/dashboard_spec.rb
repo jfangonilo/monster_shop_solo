@@ -87,9 +87,9 @@ RSpec.describe "admin dashboard" do
     @order_2.reload
     expect(@order_2.shipped?).to be(true)
 
+    visit "/admin"
     within "#order-#{@order_2.id}" do
       expect(page).to_not have_button "Ship Order"
     end
   end
-
 end

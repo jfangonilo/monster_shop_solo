@@ -15,7 +15,7 @@ class Order <ApplicationRecord
     item_orders.sum(:quantity)
   end
 
-  def all_itemorders_fulfilled?
-    true if item_orders.pluck(:status).all?("fulfilled")
+  def package_if_fulfilled
+    update(status: "packaged") if item_orders.pluck(:status).all?("fulfilled")
   end
 end

@@ -9,7 +9,7 @@ class User::OrdersController < User::BaseController
   end
 
   def show
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.includes(items: [:merchant]).find(params[:id])
   end
 
   def create

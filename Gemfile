@@ -26,6 +26,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'nyan-cat-formatter'
+  gem 'bullet'
 end
 
 group :development do

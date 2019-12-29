@@ -10,6 +10,17 @@ class Merchant::ItemsController < Merchant::BaseController
     @item = merchant.items.new(item_params)
   end
 
+  def create
+    merchant = current_user.merchant
+    item = merchant.items.new(item_params)
+    if item.save
+      redirect_to "/merchant/items"
+    else
+      flash[:error] = item.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
   def update
     item = Item.find(params[:id])
     item.toggle!(:active?)

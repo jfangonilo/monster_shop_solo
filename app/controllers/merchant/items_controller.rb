@@ -6,7 +6,8 @@ class Merchant::ItemsController < Merchant::BaseController
   end
 
   def new
-    @merchant = current_user.merchant
+    merchant = current_user.merchant
+    @item = merchant.items.new(item_params)
   end
 
   def update
@@ -26,4 +27,11 @@ class Merchant::ItemsController < Merchant::BaseController
     flash[:success] = "#{item.name} deleted"
     redirect_to merchant_dash_items_path
   end
+
+private
+
+  def item_params
+    params.permit(:name,:description,:price,:inventory,:image)
+  end
+
 end

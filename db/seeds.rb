@@ -26,8 +26,8 @@ Item.all.each do |item|
 end
 
 user = create(:random_user)
-create(:merchant_employee)
-create(:merchant_admin)
+create(:merchant_employee, merchant: merchants[0])
+create(:merchant_admin, merchant: merchants[0])
 create(:admin)
 
 order_1 = create(:random_order, user: user)

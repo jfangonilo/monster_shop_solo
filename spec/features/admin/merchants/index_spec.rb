@@ -12,7 +12,7 @@ RSpec.describe "admin merchant index" do
     create(:item_order, item: @item, order: @order, price: @item.price)
   end
 
-  it 'allows me to disable a merchant and items' do
+  it 'allows me to disable/enable a merchant and items' do
     visit "/merchants"
 
     within "#merchant-#{@merchant.id}" do
@@ -26,5 +26,18 @@ RSpec.describe "admin merchant index" do
 
     @item.reload
     expect(@item.active?).to be(false)
+
+
+    within "#merchant-#{@merchant.id}" do
+      click_button "Enable Merchant"
+    end
+
+    expect(current_path).to eq("/merchants")
+    expect(page).to have_content("#{@merchant.name} enabled")
+    @merchant.reload
+    expect(@merchant.active).to be(true)
+
+    @item.reload
+    expect(@item.active?).to be(true)
   end
 end

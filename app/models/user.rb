@@ -7,6 +7,7 @@ class User < ApplicationRecord
   validates_confirmation_of :password
 
   has_many :orders
+  belongs_to :merchant, optional: true
 
   enum role: %w(user merchant_employee merchant_admin admin)
 end

@@ -8,8 +8,8 @@
     <section id="order-<%= order.id %>">
       <li>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></br>
       Created: <%= order.created_at %></br>
-      Total Quantity: <%= order.total_quantity %></br>
-      Total Value: <%= order.grandtotal %></br></li>
+      Total Quantity: <%= order.quantity_from(@merchant) %></br>
+      Total Value: <%= order.total_from(@merchant) %></br></li>
     </section></br>
   <% end %>
 </section>

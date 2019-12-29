@@ -19,6 +19,14 @@ class Order <ApplicationRecord
     item_orders.sum(:quantity)
   end
 
+  def quantity_from(merchant)
+    items.where(merchant: merchant).sum("item_orders.quantity")
+  end
+
+  def total_from(merchant)
+    items.joins(:item_orders).where(merchant: merchant).sum("item_orders.price * item_orders.quantity")
+  end
+
   def cancel
     update(status: "cancelled")
     item_orders.each do |item_order|

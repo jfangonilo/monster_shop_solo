@@ -52,6 +52,16 @@ describe Order, type: :model do
       expect(@order_1.total_quantity).to eq(5)
     end
 
+    it 'quantity_from(merchant)' do
+      expect(@order_1.quantity_from(@meg)).to eq(2)
+      expect(@order_1.quantity_from(@brian)).to eq(3)
+    end
+
+    it 'total_from(merchant)' do
+      expect(@order_1.total_from(@meg)).to eq(200)
+      expect(@order_1.total_from(@brian)).to eq(30)
+    end
+
     it 'cancel' do
       expect(@order_1.cancelled?).to be(false)
       @order_1.cancel

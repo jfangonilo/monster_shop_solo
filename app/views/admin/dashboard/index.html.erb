@@ -4,6 +4,7 @@
       <li>Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
       Order ID: <%= order.id %></br>
       Created: <%= order.created_at %></br>
+      Status: <%= order.status.capitalize %></br>
       <% if order.packaged? %>
         <%= button_to "Ship Order", "/admin/orders/#{order.id}", method: :patch %>
       <% end %></li>

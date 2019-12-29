@@ -56,5 +56,35 @@ describe Merchant, type: :model do
       expect(@meg.distinct_cities).to match_array(["Denver","Hershey"])
     end
 
+    it 'pending_orders' do
+      user = create(:random_user)
+      merchant = create(:random_merchant)
+      items = create_list(:random_item, 5, merchant: merchant)
+
+      pending_order_1 = create(:random_order, user: user, status: "pending")
+      items.each do |item|
+        create(:item_order, item: item, order: pending_order_1, price: item.price)
+      end
+
+      pending_order_2 = create(:random_order, user: user, status: "pending")
+      items.each do |item|
+        create(:item_order, item: item, order: pending_order_2, price: item.price)
+      end
+
+      shipped_order = create(:random_order, user: user, status: "shipped")
+      items.each do |item|
+        create(:item_order, item: item, order: shipped_order, price: item.price)
+      end
+
+      cancelled_order = create(:random_order, user: user, status: "cancelled")
+      items.each do |item|
+        create(:item_order, item: item, order: cancelled_order, price: item.price)
+      end
+
+      expect(merchant.pending_orders).to include(pending_order_1)
+      expect(merchant.pending_orders).to include(pending_order_2)
+      expect(merchant.pending_orders).not_to include(shipped_order)
+      expect(merchant.pending_orders).not_to include(cancelled_order)
+    end
   end
 end

@@ -19,6 +19,7 @@ FactoryBot.define do
     email     {"merchant_employee@mail.com"}
     password  {"1234"}
     role      {1}
+    association :merchant, factory: :random_merchant
   end
 
   factory :merchant_admin, class: User do
@@ -30,6 +31,7 @@ FactoryBot.define do
     email     {"merchant_admin@mail.com"}
     password  {"1234"}
     role      {2}
+    association :merchant, factory: :random_merchant
   end
 
   factory :admin, class: User do

@@ -44,7 +44,15 @@ RSpec.describe "Merchant::Dashboard" do
         expect(page).to have_content @my_order.grandtotal
       end
 
-        expect(page).not_to have_link "#{@not_my_order.id}"
+      expect(page).not_to have_link "#{@not_my_order.id}"
     end
+  end
+
+  it 'has a link to my items index page' do
+    allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_employee)
+    visit "/merchant"
+
+    click_link "Merchant Items"
+    expect(current_path).to eq("/merchant/items")
   end
 end

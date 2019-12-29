@@ -7,6 +7,7 @@
         <% if current_admin_user %>
           <h2><%= link_to merchant.name, "/admin/merchants/#{merchant.id}" %></h2>
           <%= button_to "Disable Merchant", "/admin/merchants/#{merchant.id}", method: :patch if merchant.active %>
+          <%= button_to "Enable Merchant", "/admin/merchants/#{merchant.id}", method: :patch unless merchant.active %>
         <% else %>
           <h2><%= link_to merchant.name, "/merchants/#{merchant.id}" %></h2>
         <% end %>

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
 
   namespace :merchant, as: :merchant_dash do
     get "/", to: "dashboard#index"
-    resources :items, only: [:index, :update, :destroy]
+    resources :items, only: [:index, :update, :destroy, :new]
   end
 
   namespace :admin, as: :admin_dash do

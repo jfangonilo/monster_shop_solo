@@ -17,4 +17,21 @@ RSpec.describe "merchant items edit page" do
 
     expect(current_path).to eq("/merchant/items/#{@item.id}/edit")
   end
+
+  it "can edit an item" do
+    visit "/merchant/items/#{@item.id}/edit"
+
+    fill_in "Name", with: "fake Name"
+    fill_in "Description", with: "fake Description"
+    fill_in "Price", with: 1
+    fill_in "Image", with: "https://images.onerichs.com/CIP/preview/thumbnail/uscm/9840"
+    fill_in "Inventory", with: 1
+    click_button "Update Item"
+
+    @item.reload
+    expect(@item.active?).to be(true)
+    expect(@item.name?).to eq("fake Name")
+
+    expect(current_path).to eq("/merchant/items")
+  end
 end

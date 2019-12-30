@@ -30,8 +30,9 @@ RSpec.describe "merchant items edit page" do
 
     @item.reload
     expect(@item.active?).to be(true)
-    expect(@item.name?).to eq("fake Name")
+    expect(@item.name).to eq("fake Name")
 
+    expect(page).to have_content("Item updated!")
     expect(current_path).to eq("/merchant/items")
   end
 end

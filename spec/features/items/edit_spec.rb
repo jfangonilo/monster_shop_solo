@@ -1,3 +1,4 @@
+=begin
 require 'rails_helper'
 
 RSpec.describe "As a Visitor" do
@@ -71,3 +72,4 @@ RSpec.describe "As a Visitor" do
     end
   end
 end
+=end

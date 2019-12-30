@@ -35,4 +35,19 @@ RSpec.describe "merchant items edit page" do
     expect(page).to have_content("Item updated!")
     expect(current_path).to eq("/merchant/items")
   end
+
+  it 'doesnt update and item if the data is bad' do
+    visit "/merchant/items/#{@item.id}/edit"
+
+    fill_in "Name", with: ""
+    fill_in "Description", with: ""
+    fill_in "Price", with: "-2"
+    fill_in "Inventory", with: "-1"
+    click_button "Update Item"
+
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Price must be greater than 0")
+    expect(page).to have_content("Inventory must be greater than 0")
+  end
 end

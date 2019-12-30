@@ -47,7 +47,7 @@ RSpec.describe "merchant new item page" do
     visit "/merchant/items/new"
 
     click_button "Create Item"
-    save_and_open_page
+
     expect(page).to have_content("Name can't be blank")
     expect(page).to have_content("Description can't be blank")
     expect(page).to have_content("Price can't be blank")

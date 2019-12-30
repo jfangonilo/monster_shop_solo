@@ -12,9 +12,9 @@ RSpec.describe "merchant items edit page" do
   it 'can be accessed from the merchant items index page' do
     visit "/merchant/items"
     within "#item-#{@item.id}" do
-      expect(page).to have_button("Edit Item")
+      click_button "Edit Item"
     end
 
-    expect(current_path).to eq("/merchant/items/edit")
+    expect(current_path).to eq("/merchant/items/#{@item.id}/edit")
   end
 end

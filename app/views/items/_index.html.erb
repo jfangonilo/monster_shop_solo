@@ -1,6 +1,6 @@
 <% if @merchant %>
   <h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
-  <p align="center"><%= link_to "Add New Item", "/merchant/items/new" if current_merchant_user %></p>
+  <p align="center"><%= link_to "Add New Item", "/merchant/items/new" if current_employee_at(@merchant) %></p>
 <% else %>
   <h1>All Items</h1>
 <% end %>
@@ -31,12 +31,12 @@
       <p>Inventory: <%= item.inventory %> </p>
       <% if item.active? %>
         <p>Active</p>
-        <%= button_to "Deactivate Item", "/merchant/items/#{item.id}", method: :patch if current_merchant_user %>
+        <%= button_to "Deactivate Item", "/merchant/items/#{item.id}", method: :patch if current_employee_at(@merchant) %>
       <% else %>
         <p>Inactive</p>
-        <%= button_to "Activate Item", "/merchant/items/#{item.id}", method: :patch if current_merchant_user %>
+        <%= button_to "Activate Item", "/merchant/items/#{item.id}", method: :patch if current_employee_at(@merchant) %>
       <% end %>
-      <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_merchant_user %>
+      <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_employee_at(@merchant) %>
     </section>
     <% end %>
 </section>

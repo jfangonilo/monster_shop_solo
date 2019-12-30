@@ -25,6 +25,15 @@ class Merchant::ItemsController < Merchant::BaseController
     @item = Item.find(params[:id])
   end
 
+  def update
+    @item = Item.find(params[:id])
+    @item.update(item_params)
+    if @item.save
+      flash[:success] = "Item updated!"
+      redirect_to merchant_dash_items_path
+    end
+  end
+
   def toggle_status
     item = Item.find(params[:id])
     item.toggle!(:active?)

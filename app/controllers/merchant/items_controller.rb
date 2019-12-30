@@ -21,6 +21,10 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
+  def edit
+    @item = Item.find(params[:id])
+  end
+
   def toggle_status
     item = Item.find(params[:id])
     item.toggle!(:active?)

@@ -31,6 +31,9 @@ class Merchant::ItemsController < Merchant::BaseController
     if @item.save
       flash[:success] = "Item updated!"
       redirect_to merchant_dash_items_path
+    else
+      flash[:error] = @item.errors.full_messages.to_sentence
+      render :edit
     end
   end
 

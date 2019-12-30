@@ -50,10 +50,10 @@ class ItemsController<ApplicationController
   #   redirect_to "/items"
   # end
 
-private
+# private
 
-  def item_params
-    params.permit(:name,:description,:price,:inventory,:image)
-  end
+#   def item_params
+#     params.permit(:name,:description,:price,:inventory,:image)
+#   end
 
 end

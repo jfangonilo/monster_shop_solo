@@ -31,11 +31,12 @@
       <p>Inventory: <%= item.inventory %> </p>
       <% if item.active? %>
         <p>Active</p>
-        <%= button_to "Deactivate Item", "/merchant/items/#{item.id}", method: :patch if current_employee_at(@merchant) %>
+        <%= button_to "Deactivate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(@merchant) %>
       <% else %>
         <p>Inactive</p>
-        <%= button_to "Activate Item", "/merchant/items/#{item.id}", method: :patch if current_employee_at(@merchant) %>
+        <%= button_to "Activate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(@merchant) %>
       <% end %>
+      <%= button_to "Edit Item", "/merchant/items/#{item.id}", method: :patch if current_employee_at(@merchant) %>
       <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_employee_at(@merchant) %>
     </section>
     <% end %>

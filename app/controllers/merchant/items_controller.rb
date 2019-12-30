@@ -21,7 +21,7 @@ class Merchant::ItemsController < Merchant::BaseController
     end
   end
 
-  def update
+  def toggle_status
     item = Item.find(params[:id])
     item.toggle!(:active?)
     if item.active?

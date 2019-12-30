@@ -42,4 +42,18 @@ RSpec.describe "merchant new item page" do
       expect(page).to have_css("img[src*='#{item.image}']")
     end
   end
+
+  it 'flashes me a message if any item details are bad' do
+    visit "/merchant/items/new"
+
+    click_button "Create Item"
+
+    expect(page).to have_content("Name can't be blank")
+    expect(page).to have_content("Description can't be blank")
+    expect(page).to have_content("Price can't be blank")
+    expect(page).to have_content("Price is not a number")
+    expect(page).to have_content("Inventory can't be blank")
+    expect(page).to have_button("Create Item")
+
+  end
 end

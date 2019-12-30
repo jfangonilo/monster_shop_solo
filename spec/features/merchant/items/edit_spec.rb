@@ -6,7 +6,7 @@ RSpec.describe "merchant items edit page" do
     @merchant_user = create(:merchant_employee, merchant: @merchant)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant_user)
 
-    @item = create(:random_item, merchant: @merchant)
+    @item = create(:random_item, merchant: @merchant, active?: false)
   end
 
   it 'can be accessed from the merchant items index page' do
@@ -29,7 +29,7 @@ RSpec.describe "merchant items edit page" do
     click_button "Update Item"
 
     @item.reload
-    expect(@item.active?).to be(true)
+    expect(@item.active?).to be(false)
     expect(@item.name).to eq("fake Name")
 
     expect(page).to have_content("Item updated!")

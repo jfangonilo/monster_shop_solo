@@ -17,14 +17,14 @@ RSpec.describe 'User Registration' do
         click_link 'Register'
       end
 
-      fill_in :user_name, with: 'Fake Name'
-      fill_in :user_address, with: 'Fake Address'
-      fill_in :user_city, with: 'Fake City'
-      fill_in :user_state, with: 'Fake State'
-      fill_in :user_zip, with: '98765'
-      fill_in :user_email, with: 'fake@name.com'
-      fill_in :user_password, with: '12345'
-      fill_in :user_password_confirmation, with: '12345'
+      fill_in "Name", with: 'Fake Name'
+      fill_in "Address", with: 'Fake Address'
+      fill_in "City", with: 'Fake City'
+      fill_in "State", with: 'Fake State'
+      fill_in "Zip", with: '98765'
+      fill_in "Email", with: 'fake@name.com'
+      fill_in "Password", with: '12345'
+      fill_in "Password confirmation", with: '12345'
       click_button 'Submit'
 
       expect(current_path).to eq '/profile'
@@ -56,14 +56,14 @@ RSpec.describe 'User Registration' do
         click_link 'Register'
       end
 
-      fill_in :user_name, with: user.name
-      fill_in :user_address, with: user.address
-      fill_in :user_city, with: user.city
-      fill_in :user_state, with: user.state
-      fill_in :user_zip, with: user.zip
-      fill_in :user_email, with: user.email
-      fill_in :user_password, with: user.password
-      fill_in :user_password_confirmation, with: user.password
+      fill_in "Name", with: 'Fake Name'
+      fill_in "Address", with: 'Fake Address'
+      fill_in "City", with: 'Fake City'
+      fill_in "State", with: 'Fake State'
+      fill_in "Zip", with: '98765'
+      fill_in "Email", with: user.email
+      fill_in "Password", with: '12345'
+      fill_in "Password confirmation", with: '12345'
       click_button 'Submit'
 
       expect(page).to have_content "Email has already been taken"

@@ -36,7 +36,7 @@
         <p>Inactive</p>
         <%= button_to "Activate Item", "/merchant/items/#{item.id}", method: :patch if current_merchant_user %>
       <% end %>
-      <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? %>
+      <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_merchant_user %>
     </section>
     <% end %>
 </section>

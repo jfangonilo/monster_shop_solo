@@ -4,3 +4,11 @@
   <%= @order.city %> <%= @order.state %>, <%= @order.zip %>
 </section>
 
+<% @merchant.item_orders.where(order: @order).each do |item_order| %>
+  <section id="item-<%= item_order.item.id %>">
+    <%= link_to item_order.item.name, "/items/#{item_order.item.id}" %>
+    <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %>
+    <%= item_order.price %>
+    <%= item_order.quantity %>
+  </section>
+<% end %>

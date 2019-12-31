@@ -100,6 +100,6 @@ RSpec.describe "admin dashboard" do
     within "#order-#{@order_1.id}" do
       click_link("#{@order_1.id}")
     end
-    expect(current_path).to eq("/admin/users/#{@user_1.id}/orders/#{@order_1}.id")
+    expect(current_path).to eq("/admin/users/#{@user_1.id}/orders/#{@order_1.id}")
   end
 end

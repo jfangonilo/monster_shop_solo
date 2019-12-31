@@ -94,4 +94,12 @@ RSpec.describe "admin dashboard" do
       expect(page).to_not have_button "Ship Order"
     end
   end
+
+  it 'can access an admin only view of the order' do
+    visit "/admin"
+    within "#order-#{@order_1.id}" do
+      click_link("#{@order_1.id}")
+    end
+    expect(current_path).to eq("/admin/users/#{@user_1.id}/orders/#{@order_1}.id")
+  end
 end

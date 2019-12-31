@@ -84,6 +84,8 @@ RSpec.describe "admin dashboard" do
       click_button "Ship Order"
     end
 
+    expect(current_path).to eq("/admin")
+
     @order_2.reload
     expect(@order_2.shipped?).to be(true)
 

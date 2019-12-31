@@ -5,19 +5,21 @@
   <h1>All Items</h1>
 <% end %>
 
-<p><section id="top-5">
-  <h3>Most Popular</h3>
-  <% @items.by_quantity_ordered(5, "DESC").each do |item| %>
-    Name: <%= item.name %></br>
-    Total Sold: <%= item.quantity_sold %></br>
-  <% end %>
-</section></p>
-<p><section id="bottom-5">
-  <h3>Least Popular</h3>
-  <% @items.by_quantity_ordered(5, "ASC").each do |item| %>
-    Name: <%= item.name %></br>
-    Total Sold: <%= item.quantity_sold %></br>
-  <% end %>
+<h3>Most Popular</h3>
+<p><section class="grid-container" id="top-5">
+  <ol><% @items.by_quantity_ordered(5, "DESC").each do |item| %>
+  <section class="grid-item">
+      <li><%= item.name %>: <%= item.quantity_sold %></li>
+  </section></br>
+  <% end %></ol>
+</section>
+<h3>Least Popular</h3>
+<p><section class="grid-container" id="bottom-5">
+  <ol><% @items.by_quantity_ordered(5, "ASC").each do |item| %>
+  <section class="grid-item">
+    <li><%= item.name %>: <%= item.quantity_sold %></li>
+  </section></br>
+  <% end %></ol>
 </section></p>
 
 <section class="grid-container">
@@ -29,17 +31,15 @@
       <p> <%= item.description unless @merchant%> </p>
       <p>Price: <%=number_to_currency(item.price) %> </p>
       <p>Inventory: <%= item.inventory %> </p>
-        <% if @merchant %>
-          <% if item.active? %>
-            <p>Active</p>
-            <%= button_to "Deactivate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(@merchant) %>
-          <% else %>
-            <p>Inactive</p>
-            <%= button_to "Activate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(@merchant) %>
-          <% end %>
-          <%= button_to "Edit Item", "/merchant/items/#{item.id}/edit", method: :get if current_employee_at(@merchant) %>
-          <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_employee_at(@merchant) %>
+        <% if item.active? %>
+          <p>Active</p>
+          <%= button_to "Deactivate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(item.merchant) %>
+        <% else %>
+          <p>Inactive</p>
+          <%= button_to "Activate Item", "/merchant/items/#{item.id}/toggle_status", method: :patch if current_employee_at(item.merchant) %>
         <% end %>
+        <%= button_to "Edit Item", "/merchant/items/#{item.id}/edit", method: :get if current_employee_at(item.merchant) %>
+        <%= button_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.no_orders? && current_employee_at(item.merchant) %>
     </section>
     <% end %>
 </section>

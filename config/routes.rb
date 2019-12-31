@@ -47,6 +47,7 @@ Rails.application.routes.draw do
     resources :merchants, only: [:show, :update]
     resources :users, only: [:index, :show] do
       resources :orders, only: [:show]
+      patch "/orders/:id", to: "orders#cancel"
     end
   end
 end

@@ -6,7 +6,11 @@
 <section class="grid-container" id="pending-orders">
   <% @merchant.pending_orders.each do |order| %>
     <section class="grid-item" id="order-<%= order.id %>">
-      <li>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></br>
+      <% if current_merchant_user %>
+        <li>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></br>
+      <% elsif current_admin_user %>
+        <li>Order ID: <%= link_to order.id, "/admin/users/#{order.user_id}/orders/#{order.id}" %></br>
+      <% end %>
       Created: <%= order.created_at %></br>
       Total Quantity: <%= order.quantity_from(@merchant) %></br>
       Total Value: <%= order.total_from(@merchant) %></br></li>

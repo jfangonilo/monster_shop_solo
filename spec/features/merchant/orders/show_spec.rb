@@ -57,7 +57,7 @@ RSpec.describe "merchant orders show page" do
       click_button("Fulfill Item")
     end
 
-    expect(current_path).to eq("/merchant/orders/#{order_1.id}")
+    expect(current_path).to eq("/merchant/orders/#{@order_1.id}")
     expect(page).to have_content("Item Fulfilled")
     @item_order_2.reload
     @item_2.reload

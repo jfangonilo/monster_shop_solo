@@ -89,20 +89,8 @@ describe Item, type: :model do
         ItemOrder.create(item: item, order: order, price: item.price, quantity: 20)
       end
 
-      bottom_5.each do |item|
-        ItemOrder.create(item: item, order: order, price: item.price, quantity: 1)
-      end
-
-      expect(Item.by_quantity_ordered(5, "DESC")).to include(top_5[0])
-      expect(Item.by_quantity_ordered(5, "DESC")).to include(top_5[1])
-      expect(Item.by_quantity_ordered(5, "DESC")).to include(top_5[2])
-      expect(Item.by_quantity_ordered(5, "DESC")).to include(top_5[3])
-      expect(Item.by_quantity_ordered(5, "DESC")).to include(top_5[4])
-      expect(Item.by_quantity_ordered(5, "ASC")).to include(bottom_5[0])
-      expect(Item.by_quantity_ordered(5, "ASC")).to include(bottom_5[1])
-      expect(Item.by_quantity_ordered(5, "ASC")).to include(bottom_5[2])
-      expect(Item.by_quantity_ordered(5, "ASC")).to include(bottom_5[3])
-      expect(Item.by_quantity_ordered(5, "ASC")).to include(bottom_5[4])
+      expect(Item.by_quantity_ordered(5, "DESC")).to match_array(top_5.shuffle)
+      expect(Item.by_quantity_ordered(5, "ASC")).to match_array(bottom_5.shuffle)
     end
   end
 end

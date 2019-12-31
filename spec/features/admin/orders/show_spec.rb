@@ -91,4 +91,23 @@ RSpec.describe "admin user order show page" do\
       expect(page).to have_content("#{item_order_3.subtotal}")
     end
   end
+
+  it 'allows me to cancel a pending order' do
+    visit "/admin/users/#{@user_2.id}/orders/#{@order_4.id}"
+    expect(page).not_to have_button("Cancel Order")
+
+    visit "/admin/users/#{@user_1.id}/orders/#{@order_3.id}"
+    expect(page).not_to have_button("Cancel Order")
+
+    visit "/admin/users/#{@user_2.id}/orders/#{@order_2.id}"
+    expect(page).not_to have_button("Cancel Order")
+
+    visit "/admin/users/#{@user_1.id}/orders/#{@order_1.id}"
+    click_button("Cancel Order")
+
+    @order_1.reload
+    expect(@order_1.cancelled?).to be(true)
+    expect(page).not_to have_button("Cancel Order")
+    expect(page).to have_content("Status: Cancelled")
+  end
 end

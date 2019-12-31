@@ -1,14 +1,17 @@
 <section id = "order-data">
-  <h3>Order for: <%= @order.name %></h3>
-  Shipping address: <%= @order.address %></br>
-  <%= @order.city %> <%= @order.state %>, <%= @order.zip %>
+  <h2>Order for: <%= @order.name %></h2>
+  Shipping Address: </br>
+  <%= @order.address %></br>
+  <%= @order.city %> <%= @order.state %>, <%= @order.zip %></br>
 </section>
 
 <% @merchant.item_orders.where(order: @order).each do |item_order| %>
   <section id="item-<%= item_order.item.id %>">
-    <%= link_to item_order.item.name, "/items/#{item_order.item.id}" %>
-    <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %>
-    <%= item_order.price %>
-    <%= item_order.quantity %>
+    <ul>
+      <h3><%= link_to item_order.item.name, "/items/#{item_order.item.id}" %></h3>
+      <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %></br>
+      Item Price: <%= number_to_currency(item_order.price) %></br>
+      Quantity Ordered: <%= item_order.quantity %></br>
+    </ul></br>
   </section>
 <% end %>

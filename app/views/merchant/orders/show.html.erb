@@ -14,7 +14,7 @@
       Quantity Ordered: <%= item_order.quantity %></br>
       <% if item_order.fulfilled? %>
           <p>Item Fulfilled</p>
-      <% elsif item_order.quantity <= item_order.item.inventory %>
+      <% elsif item_order.fulfillable? %>
           <%= button_to "Fulfill Item", "/merchant/orders/#{@order.id}/item_orders/#{item_order.id}", method: :patch %>
       <% else %>
           <p>Insufficient Inventory</p>

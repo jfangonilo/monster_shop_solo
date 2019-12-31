@@ -1,8 +1,8 @@
 <section class="grid-container" id="all-orders">
   <% @orders.each do |order| %>
     <section class="grid-item"id="order-<%= order.id %>">
-      <li>Name: <%= link_to "#{order.user.name}", "/admin/users/#{order.user_id}" %></br>
-      Order ID: <%= order.id %></br>
+      <li>Name: <%= link_to order.user.name, "/admin/users/#{order.user_id}" %></br>
+      Order ID: <%= link_to order.id, "/admin/users/#{order.user_id}/orders/#{order.id}" %></br>
       Created: <%= order.created_at %></br>
       Status: <%= order.status.capitalize %></br>
       <% if order.packaged? %>

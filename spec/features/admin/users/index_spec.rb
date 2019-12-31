@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe "admin users index page" do
   before :each do
     @user_1 = create(:random_user)
-    @user_1 = create(:random_user, email: "fake2@mail.com")
+    @user_2 = create(:merchant_employee)
+    @user_3 = create(:merchant_admin)
     @admin = create(:admin)
     allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@admin)
   end
@@ -14,5 +15,33 @@ RSpec.describe "admin users index page" do
       click_link("All Users")
     end
     expect(current_path).to eq("/admin/users")
+  end
+
+  it 'displays all users' do
+    visit "/admin/users"
+
+    within "#user-#{@user_1.id}" do
+      expect(page).to have_link("#{@user_1.name}")
+      expect(page).to have_content("#{@user_1.created_at}")
+      expect(page).to have_content("#{@user_1.role.capitalize}")
+    end
+
+    within "#user-#{@user_2.id}" do
+      expect(page).to have_link("#{@user_2.name}")
+      expect(page).to have_content("#{@user_2.created_at}")
+      expect(page).to have_content("#{@user_2.role.capitalize}")
+    end
+
+    within "#user-#{@user_3.id}" do
+      expect(page).to have_link("#{@user_3.name}")
+      expect(page).to have_content("#{@user_3.created_at}")
+      expect(page).to have_content("#{@user_3.role.capitalize}")
+    end
+
+    within "#user-#{@admin.id}" do
+      expect(page).to have_link("#{@admin.name}")
+      expect(page).to have_content("#{@admin.created_at}")
+      expect(page).to have_content("#{@admin.role.capitalize}")
+    end
   end
 end

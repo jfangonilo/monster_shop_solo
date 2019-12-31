@@ -4,6 +4,7 @@
   <p><%= @display_user.address %></p>
   <p><%= @display_user.city %>, <%= @display_user.state %> <%= @display_user.zip %></p>
 </section>
+<%= link_to "Edit Profile", "/admin/users/#{@display_user.id}/edit" %>
 
 <section class="grid-container">
   <% @display_user.orders.each do |order| %>

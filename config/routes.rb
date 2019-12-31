@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :items, only: [:index, :new, :create]
   end
 
-  resources :items, except: [:new, :create, :destroy] do
+  resources :items, only: [:index, :show] do
     resource :reviews, only: [:new, :create]
   end
 
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   namespace :merchant, as: :merchant_dash do
     get "/", to: "dashboard#index"
     resources :items, only: [:index, :edit, :update, :destroy, :new, :create]
+    resources :orders, only: [:show]
     patch "/items/:id/toggle_status", to: "items#toggle_status"
   end
 

@@ -28,20 +28,20 @@ class ItemsController<ApplicationController
   #   end
   # end
 
-  def edit
-    @item = Item.find(params[:id])
-  end
+  # def edit
+  #   @item = Item.find(params[:id])
+  # end
 
-  def update
-    @item = Item.find(params[:id])
-    @item.update(item_params)
-    if @item.save
-      redirect_to "/items/#{@item.id}"
-    else
-      flash[:error] = @item.errors.full_messages.to_sentence
-      render :edit
-    end
-  end
+  # def update
+  #   @item = Item.find(params[:id])
+  #   @item.update(item_params)
+  #   if @item.save
+  #     redirect_to "/items/#{@item.id}"
+  #   else
+  #     flash[:error] = @item.errors.full_messages.to_sentence
+  #     render :edit
+  #   end
+  # end
 
   # def destroy
   #   item = Item.find(params[:id])
@@ -50,10 +50,10 @@ class ItemsController<ApplicationController
   #   redirect_to "/items"
   # end
 
-private
+# private
 
-  def item_params
-    params.permit(:name,:description,:price,:inventory,:image)
-  end
+#   def item_params
+#     params.permit(:name,:description,:price,:inventory,:image)
+#   end
 
 end

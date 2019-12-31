@@ -21,6 +21,7 @@ describe Merchant, type: :model do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
     end
+
     it 'no_orders' do
       expect(@meg.no_orders?).to eq(true)
 
@@ -85,6 +86,21 @@ describe Merchant, type: :model do
       expect(merchant.pending_orders).to include(pending_order_2)
       expect(merchant.pending_orders).not_to include(shipped_order)
       expect(merchant.pending_orders).not_to include(cancelled_order)
+    end
+
+    it 'item_orders_from_order' do
+      merchant_1 = create(:random_merchant)
+      merchant_2 = create(:random_merchant)
+      item_1 = create(:random_item, merchant: merchant_1, price: 2)
+      item_2 = create(:random_item, merchant: merchant_1, price: 4)
+      item_3 = create(:random_item, merchant: merchant_2, price: 7)
+      user = create(:random_user)
+      order_1 = create(:random_order, user: user)
+      item_order_1 = create(:item_order, order: order_1, item: item_1, price: item_1.price, quantity: 5)
+      item_order_2 = create(:item_order, order: order_1, item: item_2, price: item_2.price, quantity: 2)
+      item_order_3 = create(:item_order, order: order_1, item: item_3, price: item_3.price, quantity: 2)
+
+      expect(merchant_1.item_orders_from_order(order_1)).to match_array([item_order_1, item_order_2])
     end
   end
 end

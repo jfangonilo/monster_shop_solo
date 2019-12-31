@@ -45,5 +45,6 @@ Rails.application.routes.draw do
     get "/", to: "dashboard#index"
     resources :orders, only: [:update]
     resources :merchants, only: [:show, :update]
+    resources :users, only: [:index]
   end
 end

@@ -1,8 +1,8 @@
 class Admin::OrdersController < Admin::BaseController
 
   def show
-    @order = Order.find(params[:id])
-    @user = User.find(params[:user_id])
+    user = User.find(params[:user_id])
+    @order = user.orders.find(params[:id])
   end
 
   def update

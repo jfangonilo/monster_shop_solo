@@ -5,7 +5,7 @@
   <%= @order.city %> <%= @order.state %>, <%= @order.zip %></br>
 </section>
 
-<% @merchant.item_orders_from_order(@order).each do |item_order| %>
+<% @item_orders.each do |item_order| %>
   <section id="item-<%= item_order.item.id %>">
     <ul>
       <h3><%= link_to item_order.item.name, "/items/#{item_order.item.id}" %></h3>

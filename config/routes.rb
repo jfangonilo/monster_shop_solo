@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   namespace :merchant, as: :merchant_dash do
     get "/", to: "dashboard#index"
     resources :items, only: [:index, :edit, :update, :destroy, :new, :create]
-    resources :orders, only: [:show]
+    resources :orders, only: [:show, :update]
     patch "/items/:id/toggle_status", to: "items#toggle_status"
   end
 

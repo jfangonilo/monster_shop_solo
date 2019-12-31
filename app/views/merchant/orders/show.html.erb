@@ -12,6 +12,13 @@
       <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %></br>
       Item Price: <%= number_to_currency(item_order.price) %></br>
       Quantity Ordered: <%= item_order.quantity %></br>
+      <% if item_order.fulfilled? %>
+          <p>Item Fulfilled</p>
+      <% elsif item_order.fulfillable? %>
+          <%= button_to "Fulfill Item", "/merchant/orders/#{@order.id}/item_orders/#{item_order.id}", method: :patch %>
+      <% else %>
+          <p>Insufficient Inventory</p>
+      <% end %>
     </ul></br>
   </section>
 <% end %>

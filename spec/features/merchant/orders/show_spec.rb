@@ -4,8 +4,8 @@ RSpec.describe "merchant orders show page" do
   before :each do
     @merchant_1 = create(:random_merchant)
     @merchant_2 = create(:random_merchant)
-    @item_1 = create(:random_item, merchant: @merchant_1, price: 2)
-    @item_2 = create(:random_item, merchant: @merchant_1, price: 4)
+    @item_1 = create(:random_item, merchant: @merchant_1, price: 2, inventory: 3)
+    @item_2 = create(:random_item, merchant: @merchant_1, price: 4, inventory: 5)
     @item_3 = create(:random_item, merchant: @merchant_2, price: 7)
     @user = create(:random_user)
     @order_1 = create(:random_order, user: @user)
@@ -44,4 +44,25 @@ RSpec.describe "merchant orders show page" do
 
     expect(page).not_to have_link("#{@item_3.name}")
   end
+
+  it 'allows me to fulfill parts of an order' do
+    visit "/merchant/orders/#{@order_1.id}"
+
+    within "#item-#{@item_1.id}" do
+      expect(page).not_to have_button("Fulfill Item")
+      expect(page).to have_content("Insufficient Inventory")
+    end
+
+    within "#item-#{@item_2.id}" do
+      click_button("Fulfill Item")
+    end
+
+    expect(current_path).to eq("/merchant/orders/#{@order_1.id}")
+    expect(page).to have_content("Item Fulfilled")
+    @item_order_2.reload
+    @item_2.reload
+    expect(@item_order_2.fulfilled?).to be(true)
+    expect(@item_2.inventory).to eq(3)
+  end
+
 end

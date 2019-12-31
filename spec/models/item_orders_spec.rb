@@ -24,6 +24,29 @@ describe ItemOrder, type: :model do
 
       expect(item_order_1.subtotal).to eq(200)
     end
-  end
 
+    it 'fulfill' do
+      item_1 = create(:random_item, inventory: 7)
+      order_1 = create(:random_order)
+      item_order_1 = create(:item_order, order: order_1, item: item_1, quantity: 5)
+
+      item_order_1.fulfill
+      expect(item_order_1.fulfilled?).to be(true)
+      expect(item_1.inventory).to eq(2)
+    end
+
+    it 'fulfillable?' do
+      user = create(:random_user)
+      item_1 = create(:random_item, inventory: 7)
+      order_1 = create(:random_order, user: user)
+      item_order_1 = create(:item_order, order: order_1, item: item_1, quantity: 5)
+      expect(item_order_1.fulfillable?).to eq(true)
+
+      item_2 = create(:random_item, inventory: 1)
+      order_2 = create(:random_order, user: user)
+      item_order_2 = create(:item_order, order: order_2, item: item_2, quantity: 5)
+      expect(item_order_2.fulfillable?).to eq(false)
+    end
+
+  end
 end

@@ -15,4 +15,15 @@ RSpec.describe "admin users show page" do
     end
     expect(current_path).to eq("/admin/users/#{@user.id}")
   end
+
+  it 'shows the user profile' do
+    visit "/admin/users/#{@user.id}"
+    within "#profile-data" do
+      expect(page).to have_content(@user.name)
+      expect(page).to have_content(@user.address)
+      expect(page).to have_content(@user.city)
+      expect(page).to have_content(@user.state)
+      expect(page).to have_content(@user.zip)
+    end
+  end
 end

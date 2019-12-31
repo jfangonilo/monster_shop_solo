@@ -57,12 +57,10 @@ RSpec.describe "admin user order show page" do\
 
     visit "admin/users/#{@user_1.id}/orders/#{order.id}"
 
-    within "#order-data" do
-      expect(page).to have_content("Order ID: #{order.id}")
-      expect(page).to have_content("#{order.created_at}")
-      expect(page).to have_content("#{order.updated_at}")
-      expect(page).to have_content("#{order.status.capitalize}")
-    end
+    expect(page).to have_content("Order ID: #{order.id}")
+    expect(page).to have_content("#{order.created_at}")
+    expect(page).to have_content("#{order.updated_at}")
+    expect(page).to have_content("#{order.status.capitalize}")
 
     within "#item-#{item_1.id}" do
       expect(page).to have_content("#{item_1.name}")

@@ -4,3 +4,11 @@
   <p><%= @display_user.address %></p>
   <p><%= @display_user.city %>, <%= @display_user.state %> <%= @display_user.zip %></p>
 </section>
+
+<section class="grid-container">
+  <% @display_user.orders.each do |order| %>
+    <section class="grid-item" id="order-<%= order.id %>">
+      Order ID: <%= link_to order.id, "/admin/users/#{@display_user.id}/orders/#{order.id}" %>
+    </section>
+  <% end %>
+</section>

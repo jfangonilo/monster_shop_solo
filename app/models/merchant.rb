@@ -10,7 +10,6 @@ class Merchant <ApplicationRecord
                         :state,
                         :zip
 
-
   def no_orders?
     item_orders.empty?
   end
@@ -29,5 +28,9 @@ class Merchant <ApplicationRecord
 
   def pending_orders
     orders.distinct.where(status: "pending")
+  end
+
+  def item_orders_from_order(order)
+    item_orders.where(order: order)
   end
 end

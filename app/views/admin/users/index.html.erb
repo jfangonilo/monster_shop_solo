@@ -1,0 +1,9 @@
+<section class="grid-container">
+  <% @users.each do |user| %>
+    <section class="grid-item" id="user-<%= user.id %>">
+      <%= link_to user.name, "/admin/users/#{user.id}" %>
+      <%= user.created_at %>
+      <%= user.role.capitalize %>
+    </section>
+  <% end %>
+</section>

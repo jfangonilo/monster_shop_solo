@@ -40,4 +40,13 @@ RSpec.describe "admin merchant index" do
     @item.reload
     expect(@item.active?).to be(true)
   end
+
+  it 'displays the merchant city and state' do
+    visit "/merchants"
+
+    within "#merchant-#{@merchant.id}" do
+      expect(page).to have_content("#{@merchant.city}")
+      expect(page).to have_content("#{@merchant.state}")
+    end
+  end
 end

@@ -8,4 +8,8 @@ class Admin::UsersController < Admin::BaseController
     @display_user = User.find(params[:id])
   end
 
+  def edit
+    @display_user = User.find(params[:id])
+  end
+
 end

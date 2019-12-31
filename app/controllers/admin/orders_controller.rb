@@ -10,4 +10,11 @@ class Admin::OrdersController < Admin::BaseController
     order.update(status: "shipped")
     redirect_to admin_dash_path
   end
+
+  def cancel
+    user = User.find(params[:user_id])
+    order = user.orders.find(params[:id])
+    order.cancel
+    redirect_to "/admin/users/#{user.id}/orders/#{order.id}"
+  end
 end

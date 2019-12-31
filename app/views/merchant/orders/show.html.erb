@@ -5,20 +5,22 @@
   <%= @order.city %> <%= @order.state %>, <%= @order.zip %></br>
 </section>
 
-<% @item_orders.each do |item_order| %>
-  <section id="item-<%= item_order.item.id %>">
-    <ul>
-      <h3><%= link_to item_order.item.name, "/items/#{item_order.item.id}" %></h3>
-      <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %></br>
-      Item Price: <%= number_to_currency(item_order.price) %></br>
-      Quantity Ordered: <%= item_order.quantity %></br>
-      <% if item_order.fulfilled? %>
-          <p>Item Fulfilled</p>
-      <% elsif item_order.fulfillable? %>
-          <%= button_to "Fulfill Item", "/merchant/orders/#{@order.id}/item_orders/#{item_order.id}", method: :patch %>
-      <% else %>
-          <p>Insufficient Inventory</p>
-      <% end %>
-    </ul></br>
-  </section>
-<% end %>
+<section class="grid-container">
+  <% @item_orders.each do |item_order| %>
+    <section class="grid-item" id="item-<%= item_order.item.id %>">
+      <ul>
+        <h3><%= link_to item_order.item.name, "/items/#{item_order.item.id}" %></h3>
+        <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %></br>
+        Item Price: <%= number_to_currency(item_order.price) %></br>
+        Quantity Ordered: <%= item_order.quantity %></br>
+        <% if item_order.fulfilled? %>
+            <p>Item Fulfilled</p>
+        <% elsif item_order.fulfillable? %>
+            <%= button_to "Fulfill Item", "/merchant/orders/#{@order.id}/item_orders/#{item_order.id}", method: :patch %>
+        <% else %>
+            <p>Insufficient Inventory</p>
+        <% end %>
+      </ul></br>
+    </section>
+  <% end %>
+</section>

@@ -14,4 +14,8 @@ class ItemOrder <ApplicationRecord
     update(status: "fulfilled")
     item.update(inventory: item.inventory - quantity)
   end
+
+  def fulfillable?
+    item.inventory >= quantity
+  end
 end

@@ -28,14 +28,14 @@ RSpec.describe "merchant orders show page" do
       expect(page).to have_content("#{@order_1.zip}")
     end
 
-    within "item-#{@item_1.id}" do
+    within "#item-#{@item_1.id}" do
       expect(page).to have_link("#{@item_1.name}")
       expect(page).to have_css("img[src*='#{@item_1.image}']")
       expect(page).to have_content("#{@item_1.price}")
       expect(page).to have_content("#{@item_order_1.quantity}")
     end
 
-    within "item-#{@item_2.id}" do
+    within "#item-#{@item_2.id}" do
       expect(page).to have_link("#{@item_2.name}")
       expect(page).to have_css("img[src*='#{@item_2.image}']")
       expect(page).to have_content("#{@item_2.price}")

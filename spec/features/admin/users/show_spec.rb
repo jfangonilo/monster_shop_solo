@@ -32,7 +32,7 @@ RSpec.describe "admin users show page" do
     click_link("Edit Profile")
 
     fill_in "Name", with: "fake Name"
-    fill_in "Addess", with: "fake Addess"
+    fill_in "Address", with: "fake Addess"
     fill_in "City", with: "fake City"
     fill_in "State", with: "fake State"
     fill_in "Zip", with: 24231

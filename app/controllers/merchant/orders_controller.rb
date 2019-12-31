@@ -10,8 +10,7 @@ class Merchant::OrdersController < Merchant::BaseController
     merchant = current_user.merchant
     order = merchant.orders.find(params[:id])
     item_order = order.item_orders.find(params[:item_order_id])
-    item_order.update(status: "fulfilled")
-    item_order.item.update(inventory: item_order.item.inventory - item_order.quantity)
+    item_order.fulfill
     order.package_if_fulfilled
     redirect_to merchant_dash_order_path(order)
   end

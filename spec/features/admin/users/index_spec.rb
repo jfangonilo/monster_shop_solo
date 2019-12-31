@@ -23,25 +23,25 @@ RSpec.describe "admin users index page" do
     within "#user-#{@user_1.id}" do
       expect(page).to have_link("#{@user_1.name}")
       expect(page).to have_content("#{@user_1.created_at}")
-      expect(page).to have_content("#{@user_1.role.capitalize}")
+      expect(page).to have_content("#{@user_1.role}")
     end
 
     within "#user-#{@user_2.id}" do
       expect(page).to have_link("#{@user_2.name}")
       expect(page).to have_content("#{@user_2.created_at}")
-      expect(page).to have_content("#{@user_2.role.capitalize}")
+      expect(page).to have_content("#{@user_2.role}")
     end
 
     within "#user-#{@user_3.id}" do
       expect(page).to have_link("#{@user_3.name}")
       expect(page).to have_content("#{@user_3.created_at}")
-      expect(page).to have_content("#{@user_3.role.capitalize}")
+      expect(page).to have_content("#{@user_3.role}")
     end
 
     within "#user-#{@admin.id}" do
       expect(page).to have_link("#{@admin.name}")
       expect(page).to have_content("#{@admin.created_at}")
-      expect(page).to have_content("#{@admin.role.capitalize}")
+      expect(page).to have_content("#{@admin.role}")
     end
   end
 end

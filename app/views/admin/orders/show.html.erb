@@ -5,6 +5,7 @@
   <p>Status: <%= @order.status.capitalize %></p>
 </section>
 
+<center><%= button_to "Cancel Order", "/admin/users/#{@order.user_id}/orders/#{@order.id}", method: :patch if @order.pending? %></center></br>
 <section class="grid-container">
   <% @order.item_orders.each do |item_order| %>
     <section class="grid-item" id="item-<%= item_order.item.id %>">

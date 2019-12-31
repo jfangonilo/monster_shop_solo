@@ -2,7 +2,7 @@ class Admin::OrdersController < Admin::BaseController
 
   def show
     user = User.find(params[:user_id])
-    @order = user.orders.find(params[:id])
+    @order = user.orders.includes(items: [:merchant]).find(params[:id])
   end
 
   def update

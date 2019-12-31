@@ -26,4 +26,21 @@ RSpec.describe "admin users show page" do
       expect(page).to have_content(@user.zip)
     end
   end
+
+  it 'allows me to edit a users profile' do
+    visit "/admin/users/#{@user.id}"
+    click_link("Edit Profile")
+
+    fill_in "Name", with: "fake Name"
+    fill_in "Addess", with: "fake Addess"
+    fill_in "City", with: "fake City"
+    fill_in "State", with: "fake State"
+    fill_in "Zip", with: 24231
+    fill_in "Email", with: "fakeEmail@mail.com"
+    click_button("Update Profile")
+
+    @user.reload
+    expect(@user.name).to eq("fake Name")
+    expect(current_path).to eq("/admin/users/#{@user.id}")
+  end
 end

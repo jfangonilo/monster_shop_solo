@@ -7,19 +7,19 @@
 
 <h3>Most Popular</h3>
 <p><section class="grid-container" id="top-5">
-  <ol><% @items.by_quantity_ordered(5, "DESC").each do |item| %>
+  <% @items.by_quantity_ordered(5, "DESC").each do |item| %>
   <section class="grid-item">
-      <li><%= item.name %>: <%= item.quantity_sold %></li>
-  </section></br>
-  <% end %></ol>
+      <ul><%= item.name %>: <%= item.quantity_sold %></ul>
+  </section>
+  <% end %>
 </section>
 <h3>Least Popular</h3>
 <p><section class="grid-container" id="bottom-5">
-  <ol><% @items.by_quantity_ordered(5, "ASC").each do |item| %>
+  <% @items.by_quantity_ordered(5, "ASC").each do |item| %>
   <section class="grid-item">
-    <li><%= item.name %>: <%= item.quantity_sold %></li>
-  </section></br>
-  <% end %></ol>
+    <ul><%= item.name %>: <%= item.quantity_sold %></ul>
+  </section>
+  <% end %>
 </section></p>
 
 <section class="grid-container">
@@ -29,7 +29,7 @@
       <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
       <%= link_to image_tag(item.image), "/items/#{item.id}", id: "#{item.id}-image" %>
       <p> <%= item.description unless @merchant%> </p>
-      <p>Price: <%=number_to_currency(item.price) %> </p>
+      <p>Price: <%= number_to_currency(item.price) %> </p>
       <p>Inventory: <%= item.inventory %> </p>
         <% if item.active? %>
           <p>Active</p>

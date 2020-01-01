@@ -1,10 +1,10 @@
 <section id="profile-data">
-  <h1><%= @display_user.name %></h1>
+  <h1>Orders: <%= @display_user.name %> </h1>
   <h3><%= @display_user.email %></h3>
   <p><%= @display_user.address %></p>
   <p><%= @display_user.city %>, <%= @display_user.state %> <%= @display_user.zip %></p>
 </section>
-<%= link_to "Edit Profile", "/admin/users/#{@display_user.id}/edit" %>
+<p><%= link_to "Edit Profile", "/admin/users/#{@display_user.id}/edit" %></p>
 
 <section class="grid-container">
   <% @display_user.orders.each do |order| %>

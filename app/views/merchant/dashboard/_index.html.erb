@@ -1,4 +1,4 @@
-<h2><%= @merchant.name %></h2>
+<h1><%= @merchant.name %> Dashboard</h1>
 <% if current_merchant_user %>
   <h3><%= link_to "Merchant Items", "/merchant/items" %></h3>
 <% elsif current_admin_user%>

@@ -11,7 +11,7 @@
       <ul>
         <h3><%= link_to item_order.item.name, "/items/#{item_order.item.id}" %></h3>
         <%= link_to image_tag(item_order.item.image), "/items/#{item_order.item.id}" %></br>
-        Item Price: <%= number_to_currency(item_order.price) %></br>
+        Item Price: <%= number_to_currency(item_order.price/100.to_f) %></br>
         Quantity Ordered: <%= item_order.quantity %></br>
         <% if item_order.fulfilled? %>
             <p>Item Fulfilled</p>

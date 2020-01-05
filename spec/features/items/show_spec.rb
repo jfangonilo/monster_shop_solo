@@ -12,7 +12,7 @@ RSpec.describe 'item show page', type: :feature do
     expect(page).to have_link(@chain.merchant.name)
     expect(page).to have_link(@chain.name)
     expect(page).to have_content(@chain.description)
-    expect(page).to have_content("Price: $#{@chain.price}")
+    expect(page).to have_content(number_to_currency(@chain.price/100.to_f))
     expect(page).to have_content("Active")
     expect(page).to have_content("Inventory: #{@chain.inventory}")
     expect(page).to have_link(@bike_shop.name)

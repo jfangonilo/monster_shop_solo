@@ -66,27 +66,27 @@ RSpec.describe "admin user order show page" do\
       expect(page).to have_content("#{item_1.name}")
       expect(page).to have_content("#{item_1.description}")
       expect(page).to have_css("img[src*='#{item_1.image}']")
-      expect(page).to have_content("#{item_1.price}")
+      expect(page).to have_content(number_to_currency(item_1.price/100.to_f))
       expect(page).to have_content("#{item_order_1.quantity}")
-      expect(page).to have_content("#{item_order_1.subtotal}")
+      expect(page).to have_content(number_to_currency(item_order_1.subtotal/100.to_f))
     end
 
     within "#item-#{item_2.id}" do
       expect(page).to have_content("#{item_2.name}")
       expect(page).to have_content("#{item_2.description}")
       expect(page).to have_css("img[src*='#{item_2.image}']")
-      expect(page).to have_content("#{item_2.price}")
+      expect(page).to have_content(number_to_currency(item_2.price/100.to_f))
       expect(page).to have_content("#{item_order_2.quantity}")
-      expect(page).to have_content("#{item_order_2.subtotal}")
+      expect(page).to have_content(number_to_currency(item_order_2.subtotal/100.to_f))
     end
 
     within "#item-#{item_3.id}" do
       expect(page).to have_content("#{item_3.name}")
       expect(page).to have_content("#{item_3.description}")
       expect(page).to have_css("img[src*='#{item_3.image}']")
-      expect(page).to have_content("#{item_3.price}")
+      expect(page).to have_content(number_to_currency(item_3.price/100.to_f))
       expect(page).to have_content("#{item_order_3.quantity}")
-      expect(page).to have_content("#{item_order_3.subtotal}")
+      expect(page).to have_content(number_to_currency(item_order_3.subtotal/100.to_f))
     end
   end
 

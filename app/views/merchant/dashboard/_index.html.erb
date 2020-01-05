@@ -17,7 +17,7 @@
       <% end %>
       Created: <%= order.created_at %></br>
       Total Quantity: <%= order.quantity_from(@merchant) %></br>
-      Total Value: <%= number_to_currency(order.total_from(@merchant)) %></br></li>
+      Total Value: <%= number_to_currency(order.total_from(@merchant)/100.to_f) %></br></li>
     </section>
   <% end %>
 </section>

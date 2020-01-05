@@ -14,7 +14,7 @@ RSpec.describe "Merchant Items Index Page" do
 
       within "#item-#{@tire.id}" do
         expect(page).to have_content(@tire.name)
-        expect(page).to have_content("Price: $#{@tire.price}")
+        expect(page).to have_content(number_to_currency(@tire.price/100.to_f))
         expect(page).to have_css("img[src*='#{@tire.image}']")
         expect(page).to have_content("Active")
         expect(page).to_not have_content(@tire.description)
@@ -23,7 +23,7 @@ RSpec.describe "Merchant Items Index Page" do
 
       within "#item-#{@chain.id}" do
         expect(page).to have_content(@chain.name)
-        expect(page).to have_content("Price: $#{@chain.price}")
+        expect(page).to have_content(number_to_currency(@chain.price/100.to_f))
         expect(page).to have_css("img[src*='#{@chain.image}']")
         expect(page).to have_content("Active")
         expect(page).to_not have_content(@chain.description)
@@ -32,7 +32,7 @@ RSpec.describe "Merchant Items Index Page" do
 
       within "#item-#{@shifter.id}" do
         expect(page).to have_content(@shifter.name)
-        expect(page).to have_content("Price: $#{@shifter.price}")
+        expect(page).to have_content(number_to_currency(@shifter.price/100.to_f))
         expect(page).to have_css("img[src*='#{@shifter.image}']")
         expect(page).to have_content("Inactive")
         expect(page).to_not have_content(@shifter.description)

@@ -35,6 +35,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
+  config.include ActionView::Helpers::NumberHelper
+
   config.default_formatter = 'NyanCatFormatter'
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures

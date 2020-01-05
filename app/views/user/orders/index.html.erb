@@ -3,12 +3,12 @@
 <section class="grid-container" id ="user-orders">
   <% @orders.each do |order| %>
     <section class="grid-item" id = "order-<%= order.id %>">
-      Order ID: <%= link_to order.id, "/profile/orders/#{order.id}" %></br>
-      Created: <%= order.created_at %></br>
-      Updated: <%= order.updated_at %></br>
-      Status: <%= order.status.capitalize %></br>
-      Total Quantity: <%= order.total_quantity %></br>
-      Grand Total: <%= number_to_currency(order.grandtotal) %></br>
+      <p>Order ID: <%= link_to order.id, "/profile/orders/#{order.id}" %></p>
+      <p>Created: <%= order.created_at %></p>
+      <p>Updated: <%= order.updated_at %></p>
+      <p>Status: <%= order.status.capitalize %></p>
+      <p>Total Quantity: <%= order.total_quantity %></p>
+      <p>Grand Total: <%= number_to_currency((order.grandtotal/100).round(2)) %></p>
     </section>
   <% end %>
 </section>

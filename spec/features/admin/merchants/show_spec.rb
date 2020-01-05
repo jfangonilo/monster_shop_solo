@@ -27,7 +27,7 @@ RSpec.describe "admin merchants show page" do
       expect(page).to have_link("#{@order.id}")
       expect(page).to have_content(@order.created_at)
       expect(page).to have_content(@order.quantity_from(@merchant))
-      expect(page).to have_content(@order.total_from(@merchant))
+      expect(page).to have_content(number_to_currency(@order.total_from(@merchant)/100.to_f))
     end
   end
 end

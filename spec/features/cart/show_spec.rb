@@ -36,12 +36,12 @@ RSpec.describe 'Cart show' do
             expect(page).to have_link(item.name)
             expect(page).to have_css("img[src*='#{item.image}']")
             expect(page).to have_link("#{item.merchant.name}")
-            expect(page).to have_content("$#{item.price}")
+            expect(page).to have_content(number_to_currency(item.price/100.to_f))
             expect(page).to have_content("1")
-            expect(page).to have_content("$#{item.price}")
+            expect(page).to have_content(number_to_currency(item.price/100.to_f))
           end
         end
-        expect(page).to have_content("Total: $122")
+        expect(page).to have_content("Total: $1.22")
 
         visit "/items/#{@pencil.id}"
         click_on "Add To Cart"
@@ -50,10 +50,10 @@ RSpec.describe 'Cart show' do
 
         within "#cart-item-#{@pencil.id}" do
           expect(page).to have_content("2")
-          expect(page).to have_content("$4")
+          expect(page).to have_content("$0.04")
         end
 
-        expect(page).to have_content("Total: $124")
+        expect(page).to have_content("Total: $1.24")
       end
     end
   end

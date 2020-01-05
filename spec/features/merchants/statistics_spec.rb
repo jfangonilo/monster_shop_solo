@@ -34,7 +34,7 @@ RSpec.describe 'merchant show page', type: :feature do
 
       within ".merchant-stats" do
         expect(page).to have_content("Number of Items: 2")
-        expect(page).to have_content("Average Price of Items: $15")
+        expect(page).to have_content("Average Price of Items: $0.15")
         within ".distinct-cities" do
           expect(page).to have_content("Cities that order these items:")
           expect(page).to have_content("Hershey")

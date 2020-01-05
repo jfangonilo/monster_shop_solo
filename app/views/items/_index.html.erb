@@ -29,7 +29,7 @@
       <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
       <%= link_to image_tag(item.image), "/items/#{item.id}", id: "#{item.id}-image" %>
       <p> <%= item.description unless @merchant%> </p>
-      <p>Price: <%= number_to_currency(item.price) %> </p>
+      <p>Price: <%= number_to_currency(item.price/100.to_f) %> </p>
       <p>Inventory: <%= item.inventory %> </p>
         <% if item.active? %>
           <p>Active</p>

@@ -84,6 +84,8 @@ RSpec.describe "admin dashboard" do
       click_button "Ship Order"
     end
 
+    expect(current_path).to eq("/admin")
+
     @order_2.reload
     expect(@order_2.shipped?).to be(true)
 
@@ -91,5 +93,13 @@ RSpec.describe "admin dashboard" do
     within "#order-#{@order_2.id}" do
       expect(page).to_not have_button "Ship Order"
     end
+  end
+
+  it 'can access an admin only view of the order' do
+    visit "/admin"
+    within "#order-#{@order_1.id}" do
+      click_link("#{@order_1.id}")
+    end
+    expect(current_path).to eq("/admin/users/#{@user_1.id}/orders/#{@order_1.id}")
   end
 end

@@ -3,9 +3,9 @@ class ItemsController<ApplicationController
   def index
     if params[:merchant_id]
       @merchant = Merchant.find(params[:merchant_id])
-      @items = @merchant.items
+      @items = @merchant.items.includes(:item_orders)
     else
-      @items = Item.active_items.includes(:merchant)
+      @items = Item.active_items.includes(:merchant, :item_orders)
     end
   end
 

@@ -41,7 +41,7 @@ RSpec.describe "Merchant::Dashboard" do
         expect(page).to have_link "#{@my_order.id}"
         expect(page).to have_content @my_order.created_at
         expect(page).to have_content @my_order.quantity_from(@my_merchant)
-        expect(page).to have_content @my_order.total_from(@my_merchant)
+        expect(page).to have_content("#{@my_order.total_from(@my_merchant)}")
       end
 
       expect(page).not_to have_link "#{@not_my_order.id}"

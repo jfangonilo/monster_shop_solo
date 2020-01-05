@@ -75,27 +75,21 @@ RSpec.describe "Items Index Page" do
       ItemOrder.create(item: item, order: order, price: item.price, quantity: 20)
     end
 
-    bottom_5.each do |item|
-      ItemOrder.create(item: item, order: order, price: item.price, quantity: 1)
-    end
-
     visit "/items"
     within "#top-5" do
-      expect(page).to have_content item_1.name
-      expect(page).to have_content item_2.name
-      expect(page).to have_content item_3.name
-      expect(page).to have_content item_4.name
-      expect(page).to have_content item_5.name
-      expect(page).to have_content "Total Sold: 20"
+      expect(page).to have_content "#{item_1.name}: 20"
+      expect(page).to have_content "#{item_2.name}: 20"
+      expect(page).to have_content "#{item_3.name}: 20"
+      expect(page).to have_content "#{item_4.name}: 20"
+      expect(page).to have_content "#{item_5.name}: 20"
     end
 
     within "#bottom-5" do
-      expect(page).to have_content item_6.name
-      expect(page).to have_content item_7.name
-      expect(page).to have_content item_8.name
-      expect(page).to have_content item_9.name
-      expect(page).to have_content item_0.name
-      expect(page).to have_content "Total Sold: 1"
+      expect(page).to have_content "#{item_6.name}: 0"
+      expect(page).to have_content "#{item_7.name}: 0"
+      expect(page).to have_content "#{item_8.name}: 0"
+      expect(page).to have_content "#{item_9.name}: 0"
+      expect(page).to have_content "#{item_0.name}: 0"
     end
   end
 end

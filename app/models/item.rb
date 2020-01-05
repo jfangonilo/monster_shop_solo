@@ -29,8 +29,8 @@ class Item <ApplicationRecord
   end
 
   def self.by_quantity_ordered(amount = nil, order = "DESC")
-    joins(:item_orders)
-    .select("items.id, items.name, sum(item_orders.quantity) AS quantity_sold, items.merchant_id")
+    left_joins(:item_orders)
+    .select("items.id, items.name, COALESCE(sum(item_orders.quantity), 0) AS quantity_sold, items.merchant_id")
     .group(:id)
     .order("quantity_sold #{order}")
     .limit(amount)

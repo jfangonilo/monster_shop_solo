@@ -13,7 +13,7 @@
       <%= link_to "Home", "/" %>
       <%= link_to "All Merchants", "/merchants"%>
       <%= link_to "All Items", "/items"%>
-      <%= link_to "Cart: #{cart.total_items}", "/cart" unless current_admin_user %>
+      <%= link_to "Cart: #{cart.total_items}", "/cart" unless current_admin_user || current_merchant_user %>
       <% if current_admin_user %>
         <%= link_to "All Users", "/admin/users" %>
         <%= link_to "Admin Dashboard", "/admin" %>

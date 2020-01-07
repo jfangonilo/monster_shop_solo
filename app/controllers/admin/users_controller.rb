@@ -23,6 +23,12 @@ class Admin::UsersController < Admin::BaseController
     end
   end
 
+  def toggle_active
+    user = User.find(params[:user_id])
+    user.toggle!(:active)
+    redirect_to "/admin/users"
+  end
+
 private
 
   def user_params

@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :edit, :update] do
       resources :orders, only: [:show]
       patch "/orders/:id", to: "orders#cancel"
+      patch "/toggle_active", to: "users#toggle_active"
     end
   end
 end

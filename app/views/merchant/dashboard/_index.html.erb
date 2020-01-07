@@ -11,13 +11,13 @@
   <% @merchant.pending_orders.each do |order| %>
     <section class="grid-item" id="order-<%= order.id %>">
       <% if current_merchant_user %>
-        <li>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></br>
+        <li>Order ID: <%= link_to order.id, "/merchant/orders/#{order.id}" %></p>
       <% elsif current_admin_user %>
-        <li>Order ID: <%= link_to order.id, "/admin/users/#{order.user_id}/orders/#{order.id}" %></br>
+        <li>Order ID: <%= link_to order.id, "/admin/users/#{order.user_id}/orders/#{order.id}" %></p>
       <% end %>
-      Created: <%= order.created_at %></br>
-      Total Quantity: <%= order.quantity_from(@merchant) %></br>
-      Total Value: <%= number_to_currency(order.total_from(@merchant)/100.to_f) %></br></li>
+      <p>Created: <%= order.created_at %></p>
+      <p>Total Quantity: <%= order.quantity_from(@merchant) %></p>
+      <p>Total Value: <%= number_to_currency(order.total_from(@merchant)/100.to_f) %></p></li>
     </section>
   <% end %>
 </section>

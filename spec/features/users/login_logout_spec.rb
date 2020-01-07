@@ -23,6 +23,19 @@ RSpec.describe "User Login and Logout" do
       expect(current_path).to eq "/profile"
       expect(page).to have_content "You are already logged in"
     end
+
+    it 'I cant log in if deactivated' do
+      @user.update!(active: false)
+      visit "/login"
+
+      fill_in "Email", with: @user.email
+      fill_in "Password", with: @user.password
+
+      click_button "Log In"
+      expect(page).to have_content "Account deactivated"
+      expect(current_path).to eq "/login"
+    end
+
   end
 
   describe "As a merchant employee" do

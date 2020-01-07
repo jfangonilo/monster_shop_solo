@@ -44,4 +44,37 @@ RSpec.describe "admin users index page" do
       expect(page).to have_content("#{@admin.role}")
     end
   end
+
+  it 'can activate and deactivate users' do
+    visit "/admin/users"
+
+    within "#user-#{@user_2.id}" do
+      expect(page).to have_button "Deactivate User"
+    end
+
+    within "#user-#{@user_3.id}" do
+      expect(page).to have_button "Deactivate User"
+    end
+
+    within "#user-#{@admin.id}" do
+      expect(page).not_to have_button "Deactivate User"
+    end
+
+    within "#user-#{@user_1.id}" do
+      click_button "Deactivate User"
+    end
+
+    expect(current_path).to eq "/admin/users"
+    @user_1.reload
+    expect(@user_1.active?).to be false
+
+    within "#user-#{@user_1.id}" do
+      click_button "Activate User"
+    end
+
+    expect(current_path).to eq "/admin/users"
+    @user_1.reload
+    expect(@user_1.active?).to be true
+  end
+
 end

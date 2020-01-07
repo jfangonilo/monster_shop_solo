@@ -6,6 +6,11 @@
       <p><%= link_to user.name, "/admin/users/#{user.id}" %></p>
       <p>Account Since: <%= user.created_at %></p>
       <p>Type: <%= user.role %></p>
+      <% if user.active? %>
+        <%= button_to "Deactivate User", "/admin/users/#{user.id}/toggle_active", method: :patch unless user.admin? %>
+      <% else %>
+        <%= button_to "Activate User", "/admin/users/#{user.id}/toggle_active", method: :patch unless user.admin? %>
+      <% end %>
     </section>
   <% end %>
 </section>

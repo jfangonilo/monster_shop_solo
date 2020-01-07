@@ -20,7 +20,7 @@ RSpec.describe "merchant orders show page" do
   it 'shows only items and its data that belong to my merchant' do
     visit "/merchant/orders/#{@order_1.id}"
 
-    within "#order-data" do
+    within ".shipping-address" do
       expect(page).to have_content("#{@order_1.name}")
       expect(page).to have_content("#{@order_1.address}")
       expect(page).to have_content("#{@order_1.city}")

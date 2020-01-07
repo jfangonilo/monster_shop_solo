@@ -59,11 +59,3 @@
 <section id="dateupdated">
   <p>Updated: <%= @order.updated_at %></p>
 </section>
-
-<% if @order.pending? %>
-  <% if current_admin_user %>
-    <center><%= button_to "Cancel Order", "/admin/users/#{@order.user_id}/orders/#{@order.id}", method: :patch%></center></br>
-  <% else %>
-    <center><%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></center>
-  <% end %>
-<% end %>

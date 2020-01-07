@@ -1,1 +1,5 @@
 <%= render "show" %>
+
+<% unless @order.shipped? || @order.cancelled? %>
+    <center><%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %></center>
+<% end %>

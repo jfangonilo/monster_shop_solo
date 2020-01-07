@@ -31,8 +31,11 @@ RSpec.describe "order show page" do
     expect(page).to have_content "Total:"
   end
 
-  it 'allows me to cancel only pending orders' do
+  it 'allows me to cancel only pending and packaged orders' do
     order_packaged = create(:random_order, user: @user, status: "packaged")
+
+    visit "/profile/orders/#{order_packaged.id}"
+    expect(page).to have_button "Cancel Order"
 
     visit "/profile/orders/#{@order_1.id}"
     click_button "Cancel Order"
@@ -55,6 +58,6 @@ RSpec.describe "order show page" do
     expect(page).to_not have_button "Cancel Order"
 
     visit "/profile/orders/#{order_packaged.id}"
-    expect(page).to_not have_button "Cancel Order"
+    expect(page).to have_button "Cancel Order"
   end
 end

@@ -98,7 +98,7 @@ RSpec.describe "admin user order show page" do\
     expect(page).not_to have_button("Cancel Order")
 
     visit "/admin/users/#{@user_2.id}/orders/#{@order_2.id}"
-    expect(page).not_to have_button("Cancel Order")
+    expect(page).to have_button("Cancel Order")
 
     visit "/admin/users/#{@user_1.id}/orders/#{@order_1.id}"
     click_button("Cancel Order")
